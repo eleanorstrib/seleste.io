@@ -1,3 +1,4 @@
 *.DS_store
-secret.sh
+*secret.sh
+*secret.js
 *venv

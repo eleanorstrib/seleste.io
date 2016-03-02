@@ -17,6 +17,10 @@
 
 		<!-- Latest compiled and minified JavaScript -->
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+
+    <!--Facebook login-->
+    <script src=".facebooklogin.js"></script>
+    <script src=".secret.js"></script>
 		
 </head>
 
@@ -45,10 +49,10 @@
             <li><a href="#">Something else here</a></li>
           </ul>
         </li>
-        <li><a href="#"><fb:login-button scope="public_profile,email" onlogin="checkLoginState();">
-			</fb:login-button>
-			<div id="status">
-			</div></a>
+        <li><a href="#"><fb:login-button scope="public_profile,email,user_work_history,user_friends" onlogin="checkLoginState();">
+        </fb:login-button>
+  			<div id="status">
+  			</div></a>
 		</li>
       </ul>
     </div><!-- /.navbar-collapse -->
