@@ -2,56 +2,57 @@
 {% block content %}
 <div class="container">
 	<div class="row">
-		<form class="form-inline">
+	What do you care about most in your next job?
+	</div>
+	<form class="form-inline">
+		<div class="row">
 			<div class="col-md-2">			
 				<div class="form-group">
 					<label for="Culture & Values">Culture & Values</label><br/>
 					<img src="../static/culture.svg" width="100" alt="culture and values" /><br />
-					<input type="number" width="50" class="form-control" id="culture-values" placeholder="0">
+					<input type="number" width="50" class="form-control" id="culture-values" placeholder="0"> %
 				</div>
 			</div>
 			<div class="col-md-2">
 				<div class="form-group">
 					<label for="management">Management Team</label><br />
 					<img src="../static/management.svg" width="100" alt="management" /><br />
-					<input type="number" width="50" class="form-control" id="management" placeholder="0">
+					<input type="number" width="50" class="form-control" id="management" placeholder="0"> %
 				</div>
 			</div>
 			<div class="col-md-2">
 				<div class="form-group">
 					<label for="compensation and benefits">Compensation & Benefits</label><br />
 					<img src="../static/compensation.svg" width="100" alt="compensation" /><br />
-					<input type="number" width="50" class="form-control" id="compensation-benefits" placeholder="0">
+					<input type="number" width="50" class="form-control" id="compensation-benefits" placeholder="0"> %
 				</div>
 			</div>
 			<div class="col-md-2">
 				<div class="form-group">
 					<label for="opportunities">Opportunities</label><br />
 					<img src="../static/opportunities.svg" width="100" alt="opportunities" /><br />
-					<input type="number" width="50" class="form-control" id="opportunities" placeholder="0">
+					<input type="number" width="50" class="form-control" id="opportunities" placeholder="0"> %
 				</div>
 			</div>
 			<div class="col-md-2">
 				<div class="form-group">
 					<label for="work/life balance">Work/Life Balance</label><br />
 					<img src="../static/balance.svg" width="100" alt="work/life balance" /><br />
-					<input type="number" width="50" class="form-control" id="work-life-balance" placeholder="0">
+					<input type="number" width="50" class="form-control" id="work-life-balance" placeholder="0"> %
 				</div>
 			</div>
 			<div class="col-md-2">
 				<div class="form-group">
 					<label for="recommend to a friend">Recommend to a Friend</label><br />
 					<img src="../static/recommend.svg" width="100" alt="recommend to a friend" /><br />
-					<input type="number" width="50" class="form-control" id="recommend-to-a-friend" placeholder="0">
+					<input type="number" width="50" class="form-control" id="recommend-to-a-friend" placeholder="0"> %
 				</div>
 			</div>
 
-
-		</form>
-	</div>
-
-
-
-
+		</div>
+		<div class="row">
+			<button type="submit" class="btn btn-default">submit</button>
+		</div>
+	</form>
 </div>
 {% endblock %}
