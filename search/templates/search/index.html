@@ -1,16 +1,22 @@
 {% extends 'base.html' %}
 {% block content %}
 <div class="container">
+	
 	<div class="row">
 	What do you care about most in your next job?
 	</div>
-	<form class="form-inline">
+
+	<div class="row error-msg">
+	</div>
+
+	<form class="form-inline" id="priorities-form" method="GET">
+		
 		<div class="row">
 			<div class="col-md-2">			
 				<div class="form-group">
 					<label for="Culture & Values">Culture & Values</label><br/>
 					<img src="../static/culture.svg" width="100" alt="culture and values" /><br />
-					<input type="number" width="50" class="form-control" id="culture-values" placeholder="0"> %
+					<input type="number" width="50" class="form-control" id="culturevalues" placeholder="0"> %
 				</div>
 			</div>
 			<div class="col-md-2">
@@ -24,7 +30,7 @@
 				<div class="form-group">
 					<label for="compensation and benefits">Compensation & Benefits</label><br />
 					<img src="../static/compensation.svg" width="100" alt="compensation" /><br />
-					<input type="number" width="50" class="form-control" id="compensation-benefits" placeholder="0"> %
+					<input type="number" width="50" class="form-control" id="compensationbenefits" placeholder="0"> %
 				</div>
 			</div>
 			<div class="col-md-2">
@@ -38,21 +44,24 @@
 				<div class="form-group">
 					<label for="work/life balance">Work/Life Balance</label><br />
 					<img src="../static/balance.svg" width="100" alt="work/life balance" /><br />
-					<input type="number" width="50" class="form-control" id="work-life-balance" placeholder="0"> %
+					<input type="number" width="50" class="form-control" id="worklifebalance" placeholder="0"> %
 				</div>
 			</div>
 			<div class="col-md-2">
 				<div class="form-group">
 					<label for="recommend to a friend">Recommend to a Friend</label><br />
 					<img src="../static/recommend.svg" width="100" alt="recommend to a friend" /><br />
-					<input type="number" width="50" class="form-control" id="recommend-to-a-friend" placeholder="0"> %
+					<input type="number" width="50" class="form-control" id="recommendtoafriend" placeholder="0"> %
 				</div>
 			</div>
-
 		</div>
+
 		<div class="row">
 			<button type="submit" class="btn btn-default">submit</button>
 		</div>
 	</form>
 </div>
+<script src="https://code.jquery.com/jquery-2.2.1.min.js"></script>
+<script src="http://ajax.microsoft.com/ajax/jquery.validate/1.5.5/jquery.validate.min.js"></script>
+<script type="text/javascript" src="../static/validationscript.js"></script>
 {% endblock %}
