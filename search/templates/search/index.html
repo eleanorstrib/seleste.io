@@ -1,5 +1,10 @@
 {% extends 'base.html' %}
+{% load staticfiles %}
 {% block content %}
+<script src="https://code.jquery.com/jquery-2.2.1.min.js"></script>
+<script type="text/javascript" src="../static/scripts/jqueryvalidate.js"></script>
+<script type="text/javascript" src="../static/scripts/validationscript.js"></script>
+<link rel="stylesheet" type="text/css" href="../static/styles/style.css"></script>
 <div class="container">
 	
 	<div class="row">
@@ -15,43 +20,45 @@
 			<div class="col-md-2">			
 				<div class="form-group">
 					<label for="Culture & Values">Culture & Values</label><br/>
-					<img src="../static/culture.svg" width="100" alt="culture and values" /><br />
-					<input type="number" width="50" class="form-control" id="culturevalues" placeholder="0"> %
+					<img src="../static/images/culture.svg" alt="culture and values" id="culturevalues" /><br />
+					<input type="number" class="form-control" id="culturevalues" placeholder="16.7"> %
 				</div>
 			</div>
 			<div class="col-md-2">
 				<div class="form-group">
+					 
 					<label for="management">Management Team</label><br />
-					<img src="../static/management.svg" width="100" alt="management" /><br />
-					<input type="number" width="50" class="form-control" id="management" placeholder="0"> %
+					<img src="../static/images/management.svg" alt="management" id="management"/><br />
+					<input type="number" class="form-control" id="management" placeholder="1" value="10
+					">
 				</div>
 			</div>
 			<div class="col-md-2">
 				<div class="form-group">
 					<label for="compensation and benefits">Compensation & Benefits</label><br />
-					<img src="../static/compensation.svg" width="100" alt="compensation" /><br />
-					<input type="number" width="50" class="form-control" id="compensationbenefits" placeholder="0"> %
+					<img src="../static/images/compensation.svg" alt="compensation" id="compensationbenefits" /><br />
+					<input type="number" class="form-control" id="compensationbenefits" placeholder="16.7"> %
 				</div>
 			</div>
 			<div class="col-md-2">
 				<div class="form-group">
 					<label for="opportunities">Opportunities</label><br />
-					<img src="../static/opportunities.svg" width="100" alt="opportunities" /><br />
-					<input type="number" width="50" class="form-control" id="opportunities" placeholder="0"> %
+					<img src="../static/images/opportunities.svg" alt="opportunities" id="opportunities"/><br />
+					<input type="number" class="form-control" id="opportunities" placeholder="16.7"> %
 				</div>
 			</div>
 			<div class="col-md-2">
 				<div class="form-group">
 					<label for="work/life balance">Work/Life Balance</label><br />
-					<img src="../static/balance.svg" width="100" alt="work/life balance" /><br />
-					<input type="number" width="50" class="form-control" id="worklifebalance" placeholder="0"> %
+					<img src="../static/images/balance.svg" alt="work/life balance" id="worklifebalance"/><br />
+					<input type="number" class="form-control" id="worklifebalance" placeholder="16.7"> %
 				</div>
 			</div>
 			<div class="col-md-2">
 				<div class="form-group">
 					<label for="recommend to a friend">Recommend to a Friend</label><br />
-					<img src="../static/recommend.svg" width="100" alt="recommend to a friend" /><br />
-					<input type="number" width="50" class="form-control" id="recommendtoafriend" placeholder="0"> %
+					<img src="../static/images/recommend.svg" alt="recommend to a friend" id="recommendtoafriend" /><br />
+					<input type="number" class="form-control" id="recommendtoafriend" placeholder="16.7"> %
 				</div>
 			</div>
 		</div>
@@ -61,7 +68,5 @@
 		</div>
 	</form>
 </div>
-<script src="https://code.jquery.com/jquery-2.2.1.min.js"></script>
-<script src="http://ajax.microsoft.com/ajax/jquery.validate/1.5.5/jquery.validate.min.js"></script>
-<script type="text/javascript" src="../static/validationscript.js"></script>
+
 {% endblock %}
