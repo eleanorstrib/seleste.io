@@ -1,26 +1,51 @@
 $(document).ready(function(){
 	// change the size of the image based on the value selected in the box
 	$('input#culturevalues').change(function(){
-		$('img#culturevalues').css("width", parseInt($('input#culturevalues').val()));
+		$('img#culturevalues').animate({
+    	left: "+=50",
+    	width: parseInt($('input#culturevalues').val()) + 20,
+  		}, 2000, function() {
+  	});
 	});
 
 	$('input#opportunities').change(function(){
-		$('img#opportunities').css("width", parseInt($('input#opportunities').val()));
+		$('img#opportunities').animate({
+    	left: "+=50",
+    	width: parseInt($('input#opportunities').val()) + 20,
+  		}, 2000, function() {
+  	});
 	});
 
 	$('input#management').change(function(){
-		$('img#management').css("width", parseInt($('input#management').val()));
+		$('img#management').animate({
+    	left: "+=50",
+    	width: parseInt($('input#management').val()) + 20,
+  		}, 2000, function() {
+  	});
 	});
 
 	$('input#compensationbenefits').change(function(){
-		$('img#compensationbenefits').css("width", parseInt($('input#compensationbenefits').val()));
+		$('img#compensationbenefits').animate({
+    	left: "+=50",
+    	width: parseInt($('input#compensationbenefits').val()) + 20,
+  		}, 2000, function() {
+  	});
 	});
 
 	$('input#worklifebalance').change(function(){
-		$('img#worklifebalance').css("width", parseInt($('input#worklifebalance').val()));
+		$('img#worklifebalance').animate({
+    	left: "+=50",
+    	width: parseInt($('input#worklifebalance').val()) + 20,
+  		}, 2000, function() {
+  	});
 	});
+
 	$('input#recommendtoafriend').change(function(){
-		$('img#recommendtoafriend').css("width", parseInt($('input#recommendtoafriend').val()));
+		$('img#recommendtoafriend').animate({
+    	left: "+=50",
+    	width: parseInt($('input#recommendtoafriend').val()) + 20,
+  		}, 2000, function() {
+  	});
 	});
 
 

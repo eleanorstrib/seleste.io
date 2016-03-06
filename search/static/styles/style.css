@@ -2,20 +2,20 @@
 img  {
 	max-width: 100%;
     height: auto;
-	width: 30px;
+	width: 47px;
 	color: red;
 	border-style: solid;
 	border-width: 1px;
 	border-color:black;
 }
 
-img#opportunities {
-	border-style: solid;
-	border-width: 1px;
-	border-color: red;
-}
+
 
 svg {
 
 	fill: red;
+}
+
+.graphic-row {
+	height: 100px;
 }
