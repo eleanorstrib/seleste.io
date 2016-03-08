@@ -55,10 +55,16 @@ $(document).ready(function(){
   	});
 	});
 
-	function checkTotal(){
-		if (parseInt(($('input#culturevalues').val())) + parseInt(($('input#opportunities').val())) +  
+	function sumTotal(){
+		var currentTotal = parseInt(($('input#culturevalues').val())) + parseInt(($('input#opportunities').val())) +  
 		parseInt(($('input#management').val())) + parseInt(($('input#compensationbenefits').val())) +  
-		parseInt(($('input#worklifebalance').val())) + parseInt(($('input#recommendtoafriend').val())) === 100){
+		parseInt(($('input#worklifebalance').val())) + parseInt(($('input#recommendtoafriend').val()));
+		$('div.error-msg').html("You've allocated " + currentTotal + "of your preferences.  You have " + (100-currentTotal) + "% left.");
+		return currentTotal;
+	}
+
+	function checkTotal(){
+		if (sumTotal() === 100){
 			return true;
 		} else {
 			return false;
