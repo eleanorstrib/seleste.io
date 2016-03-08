@@ -10,61 +10,57 @@
 	What do you care about most in your next job?
 	</div>
 
-	<div class="row error-msg">
+	<div class="row total-msg">
+	Let us know how important each of the following is to you by allocating a point value.  When you've allocated 100 points across these 5 factors, click "Next".  
 	</div>
 
-	<form class="form-inline" id="priorities-form" method="GET">
+	<form class="form-inline" id="priorities-form" action="" method="POST">
 		
 		<div class="row">
 			<div class="col-md-4">			
 				<div class="form-group">
 					<label for="culture and values">Culture & Values</label><br/>
+					<input type="number" class="form-control" value= "0" id="culturevalues" name="culturevalues" min="0" max="100" required><br />
 					<img src="../static/images/culture.svg" alt="culture and values" id="culturevalues" /><br />
-					<input type="number" class="form-control" value= "0" id="culturevalues" name="culturevalues" min="0" max="100" required> %
 				</div>
 			</div>
 			<div class="col-md-4">
 				<div class="form-group">
 					<label for="management team">Management Team</label><br />
+					<input type="number" class="form-control" value= "0" id="management" name="management" min="0" max="100" required> <br />					
 					<img src="../static/images/management.svg" alt="management" id="management"/><br />
-					<input type="number" class="form-control" value= "0" id="management" name="management" min="0" max="100" required> %
 				</div>
 			</div>
 			<div class="col-md-4">
 				<div class="form-group">
 					<label for="compensation and benefits">Compensation & Benefits</label><br />
+					<input type="number" class="form-control"value= "0" id="compensationbenefits" name="compensationbenefits"min="0" max="100" required><br />			
 					<img src="../static/images/compensation.svg" alt="compensation" id="compensationbenefits" /><br />
-					<input type="number" class="form-control"value= "0" id="compensationbenefits" name="compensationbenefits"min="0" max="100" required> %
 				</div>
 			</div>
 		</div>
 
 		<div class="row">
+			<div class="col-md-2"></div>
 			<div class="col-md-4">
 				<div class="form-group">
 					<label for="opportunities">Opportunities</label><br />
+					<input type="number" class="form-control"  value= "0" id="opportunities" name="opportunities" min="0" max="100" required><br />
 					<img src="../static/images/opportunities.svg" alt="opportunities" id="opportunities"/><br />
-					<input type="number" class="form-control"  value= "0" id="opportunities" name="opportunities" min="0" max="100" required> %
 				</div>
 			</div>
 			<div class="col-md-4">
 				<div class="form-group">
 					<label for="work/life balance">Work/Life Balance</label><br />
+					<input type="number" class="form-control" value= "0" id="worklifebalance" name="worklifebalance" min="0" max="100" required><br />
 					<img src="../static/images/balance.svg" alt="work/life balance" id="worklifebalance"/><br />
-					<input type="number" class="form-control" value= "0" id="worklifebalance" name="worklifebalance" min="0" max="100" required> %
 				</div>
 			</div>
-			<div class="col-md-4">
-				<div class="form-group">
-					<label for="recommend to a friend">Recommend to a Friend</label><br />
-					<img src="../static/images/recommend.svg" alt="recommend to a friend" id="recommendtoafriend" /><br />
-					<input type="number" class="form-control" value= "0" id="recommendtoafriend" name="recommendtoafriend" min="0" max="100" required> %
-				</div>
-			</div>
+			<div class="col-md-2"></div>
 		</div>
 
 		<div class="row">
-			<button type="submit" class="btn btn-default" onsubmit="return checkValuesSubmit()">submit</button>
+			<button type="submit" class="btn btn-default" onsubmit="return checkValuesSubmit()" value="{{ next }}" name="next">next</button>
 		</div>
 	</form>
 </div>
