@@ -1,6 +1,7 @@
 $(document).ready(function(){
 	var priorities = {};
-	// document.getElementByID("priorities-submit").disabled = true;
+
+	$('button[type=submit]').attr('disabled', 'disabled');
 
 	// change the size of the image based on the value selected in the box
 	$('input#culturevalues').change(function(){
@@ -52,6 +53,11 @@ $(document).ready(function(){
 		var currentTotal = parseInt(($('input#culturevalues').val())) + parseInt(($('input#opportunities').val())) +  
 		parseInt(($('input#management').val())) + parseInt(($('input#compensationbenefits').val())) +  
 		parseInt(($('input#worklifebalance').val()));
+		
+		if (currentTotal === 100) {
+			$('button[type=submit]').removeAttr('disabled');
+		}
+
 		return currentTotal;
 	}
 
@@ -59,12 +65,13 @@ $(document).ready(function(){
 		var currentTotal = sumTotal()
 		if (currentTotal < 100) {
 			$('div.total-msg').html("You've allocated " + currentTotal + " points. " + (100-currentTotal) + " left!");
+			$('button[type=submit]').attr('disabled', 'disabled');
 			return false;
 		} else if (currentTotal === 100) {
 			$('div.total-msg').html("Nice work!  You've allocated all 100 points.");
-			// document.getElementById('priorities-submit').disabled = false;
 			return true;
 		} else {
+			$('button[type=submit]').attr('disabled', 'disabled');
 			$('div.total-msg').html("Oops, you've over allocated by " + (currentTotal-100) + " points.  Try rebalancing.");
 			return false;
 		}
@@ -79,7 +86,9 @@ $(document).ready(function(){
 			priorities.compensationbenefits = parseInt(($('input#compensationbenefits').val()));
 			priorities.worklifebalance = parseInt(($('input#worklifebalance').val()));
 			localStorage.setItem("priorities", JSON.stringify(priorities));
-			console.log(localStorage);
+			console.log(localStorage); 
+		} else {
+			$('div.total-msg').html("Your allocations need to add up to 100 before you can continue.")
 		};
 	});
 
