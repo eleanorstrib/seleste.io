@@ -1,5 +1,7 @@
 $(document).ready(function(){
-	var priorities = {}
+	var priorities = {};
+	// document.getElementByID("priorities-submit").disabled = true;
+
 	// change the size of the image based on the value selected in the box
 	$('input#culturevalues').change(function(){
 		$('img#culturevalues').animate({
@@ -60,6 +62,7 @@ $(document).ready(function(){
 			return false;
 		} else if (currentTotal === 100) {
 			$('div.total-msg').html("Nice work!  You've allocated all 100 points.");
+			// document.getElementById('priorities-submit').disabled = false;
 			return true;
 		} else {
 			$('div.total-msg').html("Oops, you've over allocated by " + (currentTotal-100) + " points.  Try rebalancing.");
@@ -75,10 +78,8 @@ $(document).ready(function(){
 			priorities.management = parseInt(($('input#management').val()));
 			priorities.compensationbenefits = parseInt(($('input#compensationbenefits').val()));
 			priorities.worklifebalance = parseInt(($('input#worklifebalance').val()));
-			console.log(priorities);
-		} else {
-			console.log("Not ok");
-			return ("Not ok");
+			localStorage.setItem("priorities", JSON.stringify(priorities));
+			console.log(localStorage);
 		};
 	});
 
