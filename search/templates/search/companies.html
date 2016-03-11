@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block content %}
+
+<div class="container">
+
+	<div class="row">
+		<div class="col-md-4"></div>
+		<div class="col-md-4">
+			Which companies are you interested in?
+		</div>
+		<div class="col-md-4"></div>
+	</div>
+	<div class="row">
+		<div class="col-md-2"></div>
+		<div class="col-md-8">
+			Get a ranked list, based on your priorities, for up to 3 companies using the search boxes below.
+		</div>
+		<div class="col-md-2"></div>
+	</div>
+	<form class="form-inline" id="companies-form" action="" method="get">
+	<div class="row">
+		
+		<div class="col-md-4">
+			<div class="form-group">
+				<input type="text" name="company1" id="company1" class="company" required> <br />
+				<label for "company one">Company #1</label>
+			</div>
+		</div>
+		<div class="col-md-4">
+			<div class="form-group">
+				<input type="text" name="company2" id="company2" class="company" required> <br />
+				<label for "company one">Company #2</label>
+			</div>
+		</div>
+		<div class="col-md-4">
+			<div class="form-group">
+				<input type="text" name="company3" id="company3" class="company"> <br />
+				<label for "company one">Company #3</label>
+			</div>
+		</div>
+
+	</div>
+
+	<div class="row">
+		<div class="col-md-5"></div>
+		<div class="col-md-2">
+			<button type="submit" class="btn btn-default" id="companies-submit" name="next-results">see results</button>
+		</div>
+		<div class="col-md-5"></div>
+	</div>
+	</form>
+</div>
+</div>
+
+{% endblock %}

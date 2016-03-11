@@ -77,20 +77,20 @@ $(document).ready(function(){
 		}
 	};
 
-	$("#priorities-form").on('submit', function(e) {
-		e.preventDefault();
-		if (checkTotal()) {
-			priorities.culturevalues = parseInt(($('input#culturevalues').val()));
-			priorities.opportunities = parseInt(($('input#opportunities').val()));
-			priorities.management = parseInt(($('input#management').val()));
-			priorities.compensationbenefits = parseInt(($('input#compensationbenefits').val()));
-			priorities.worklifebalance = parseInt(($('input#worklifebalance').val()));
-			localStorage.setItem("priorities", JSON.stringify(priorities));
-			console.log(localStorage); 
-		} else {
-			$('div.total-msg').html("Your allocations need to add up to 100 before you can continue.")
-		};
-	});
+	// $("#priorities-form").on('submit', function(e) {
+	// 	e.preventDefault();
+	// 	if (checkTotal()) {
+	// 		priorities.culturevalues = parseInt(($('input#culturevalues').val()));
+	// 		priorities.opportunities = parseInt(($('input#opportunities').val()));
+	// 		priorities.management = parseInt(($('input#management').val()));
+	// 		priorities.compensationbenefits = parseInt(($('input#compensationbenefits').val()));
+	// 		priorities.worklifebalance = parseInt(($('input#worklifebalance').val()));
+	// 		localStorage.setItem("priorities", JSON.stringify(priorities));
+	// 	} else {
+	// 		// this is a failsafe, button should be disabled in checkTotal anyway
+	// 		$('div.total-msg').html("Your allocations need to add up to 100 before you can continue.")
+	// 	};
+	// });
 
 
 });
