@@ -1,8 +1,8 @@
 //jquery client code
+	
 
-
-$(document).ready(function(GDPartner, GDKey){
-	console.log(GDPartner + "GD Partner");
+$(document).ready(function(){
+	console.log(GDPartner);
 	// START DETECTION SCRIPT
 	// This is a jQuery browser detection script I downloaded
 	// from http://stoimen.com/jquery.client.plugin/jquery.client.js.zip
@@ -140,15 +140,16 @@ $(document).ready(function(GDPartner, GDKey){
 		}
 	}
 
-	
-var userAgent=($.client.browser).toLowerCase()
-var userIP="localhost:8000"
 
 
 function gdAPICompany(company){
-		apiCall="http://api.glassdoor.com/api/api.htm?t.p="+GDPartner+"&t.k="+GDKey+"&userip="+userIP+"&useragent="+userAgent+"&format=json&v=1&action=employers&q="+company
-		console.log(company);
-	
+
+		var userAgent=($.client.browser).toLowerCase();
+		var gdAPICompanyResults = [];
+		console.log(company, GDPartner, GDKey, tempIP, userAgent);
+		apiCall="http://api.glassdoor.com/api/api.htm?t.p="+GDPartner+"&t.k="+GDKey+"&userip="+tempIP+"&useragent="+userAgent+"&format=json&v=1&action=employers&q="+company
+		console.log(apiCall);
+
 		$.ajax({
 			url: apiCall,
 			data: {
@@ -174,8 +175,12 @@ function gdAPICompany(company){
 };
 
 $('#company1').blur(function(){
-	gdAPICompany($('#company1').val(), GDPartner);
+	gdAPICompany($('#company1').val());
 });
+
+
+
+
 
 function clarifyQuery(company, gdAPIData) {
 	$('#queryNoMatchModal').modal('show');
