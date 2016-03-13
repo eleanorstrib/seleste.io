@@ -143,7 +143,7 @@ $(document).ready(function(){
 
 var gdAPICompanyResults = [];
 function gdAPICompany(company){
-
+		company = company.toLowerCase()
 		var userAgent=($.client.browser).toLowerCase();
 		
 		apiCall="http://api.glassdoor.com/api/api.htm?t.p="+GDPartner+"&t.k="+GDKey+"&userip="+tempIP+"&useragent="+userAgent+"&format=json&v=1&action=employers&q="+company
@@ -176,26 +176,23 @@ function gdAPICompany(company){
 
 $('#company1').blur(function(){
 	gdAPICompany($('#company1').val());
-	console.log(gdAPICompanyResults);
 });
 
 $('#company2').blur(function(){
 	gdAPICompany($('#company2').val());
-	console.log(gdAPICompanyResults);
 });
 
 $('#company3').blur(function(){
 	gdAPICompany($('#company3').val());
-	console.log(gdAPICompanyResults);
 });
 
 function clarifyQuery(company, gdJSONResult) {
 	$('#queryNoMatchModal').modal('show');
 	jQuery.each(gdJSONResult.employers, function(i) {
-		
-		$("#company-clarify-select").html(gdJSONResult.employers);
-		console.log(gdJSONResult.employers[i].name)
-		document.createElement("br");
+		var option = gdJSONResult.employers[i].name;
+		var addLine = $("<tr><td><input type=\"radio\" class=\"clarify-company\" / name=" + option + "></td><td><label for=\""+ option + ">" + option + "</td></tr>");
+		$('#company-clarify-select').append(addLine);
+		console.log(option);
 	});
 	console.log("search query not an exact match for " + company);
 };
