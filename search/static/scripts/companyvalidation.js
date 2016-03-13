@@ -141,51 +141,53 @@ $(document).ready(function(){
 	}
 
 
-
+var gdAPICompanyResults = [];
 function gdAPICompany(company){
 
 		var userAgent=($.client.browser).toLowerCase();
-		var gdAPICompanyResults = [];
-		console.log(company, GDPartner, GDKey, tempIP, userAgent);
+		
 		apiCall="http://api.glassdoor.com/api/api.htm?t.p="+GDPartner+"&t.k="+GDKey+"&userip="+tempIP+"&useragent="+userAgent+"&format=json&v=1&action=employers&q="+company
-		console.log(apiCall);
-
-		$.ajax({
-			url: apiCall,
-			data: {
-				format: 'json'
-			},
-			dataType: 'jsonp',
-			success: function(data){
-				var gdJSONResult = JSON.stringify(data.response);
-				gdJSONResult = JSON.parse(gdJSONResult);
-				console.log(gdJSONResult.employers);
-				if ((gdJSONResult.employers).length === 1){
-					gdAPICompanyResults.push(gdJSONResult);
-					console.log('gdAPICompanyResults updated!');
-					console.log(gdAPICompanyResults);
-					return gdAPICompanyResults;
-				} else {
-					clarifyQuery(company, gdJSONResult);
-				}
-			},
-			error: function(){
-				console.log("didn't work");
-			},
-			type: 'GET'
-		});
+		if (company !== ""){
+				$.ajax({
+					url: apiCall,
+					data: {
+						format: 'json'
+					},
+					dataType: 'jsonp',
+					success: function(data){
+						var gdJSONResult = JSON.stringify(data.response);
+						gdJSONResult = JSON.parse(gdJSONResult);
+						console.log(gdJSONResult.employers);
+						if ((gdJSONResult.employers).length === 1){
+							gdAPICompanyResults.push(gdJSONResult);
+							console.log('gdAPICompanyResults updated!');
+							console.log(gdAPICompanyResults);
+							return gdAPICompanyResults;
+						} else {
+							clarifyQuery(company, gdJSONResult);
+						}
+					},
+					error: function(){
+						console.log("didn't work");
+					},
+					type: 'GET'
+				});
+		};
 };
 
 $('#company1').blur(function(){
 	gdAPICompany($('#company1').val());
+	console.log(gdAPICompanyResults);
 });
 
 $('#company2').blur(function(){
 	gdAPICompany($('#company2').val());
+	console.log(gdAPICompanyResults);
 });
 
 $('#company3').blur(function(){
 	gdAPICompany($('#company3').val());
+	console.log(gdAPICompanyResults);
 });
 
 function clarifyQuery(company, gdAPIData) {
