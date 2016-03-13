@@ -53,6 +53,38 @@
 		<div class="col-md-5"></div>
 	</div>
 	</form>
+
+
+	<!-- Trigger the modal with a button -->
+	<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#queryNoMatchModal">Open Modal</button>
+
+	<!-- This modal appears automatically when a search term does n
+	match a company name exactly in the Glassdoor API -->
+	<div id="queryNoMatchModal" class="modal fade" role="dialog">
+	  <div class="modal-dialog">
+
+	    <!-- Modal content-->
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <h4 class="modal-title"></h4>
+	      </div>
+	      <div class="modal-body">
+	        <p>Your query for wasn't an exact match with any company -- did you mean one of the ones below?<br />
+	        </p>
+	        <div id="clarify-query-modal">
+	       		<form name="clarify-query-form" >
+	        	
+	        	</form>
+	        </div>
+	        </p>
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+	      </div>
+	    </div>
+
+	  </div>
+	</div>
 </div>
 </div>
 

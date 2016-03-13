@@ -159,9 +159,8 @@ function gdAPICompany(company){
 						gdJSONResult = JSON.parse(gdJSONResult);
 						console.log(gdJSONResult.employers);
 						if ((gdJSONResult.employers).length === 1){
-							gdAPICompanyResults.push(gdJSONResult);
+							gdAPICompanyResults.push(gdJSONResult.employeers);
 							console.log('gdAPICompanyResults updated!');
-							console.log(gdAPICompanyResults);
 							return gdAPICompanyResults;
 						} else {
 							clarifyQuery(company, gdJSONResult);
@@ -190,10 +189,15 @@ $('#company3').blur(function(){
 	console.log(gdAPICompanyResults);
 });
 
-function clarifyQuery(company, gdAPIData) {
+function clarifyQuery(company, gdJSONResult) {
 	$('#queryNoMatchModal').modal('show');
+	jQuery.each(gdJSONResult.employers, function(i) {
+		
+		$("#company-clarify-select").html(gdJSONResult.employers);
+		console.log(gdJSONResult.employers[i].name)
+		document.createElement("br");
+	});
 	console.log("search query not an exact match for " + company);
-	console.log(" testing " + company + gdAPIData[1]);
 };
 
 
