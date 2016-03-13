@@ -163,6 +163,8 @@ function gdAPICompany(company){
 				if ((gdJSONResult.employers).length === 1){
 					gdAPICompanyResults.push(gdJSONResult);
 					console.log('gdAPICompanyResults updated!');
+					console.log(gdAPICompanyResults);
+					return gdAPICompanyResults;
 				} else {
 					clarifyQuery(company, gdJSONResult);
 				}
@@ -178,9 +180,13 @@ $('#company1').blur(function(){
 	gdAPICompany($('#company1').val());
 });
 
+$('#company2').blur(function(){
+	gdAPICompany($('#company2').val());
+});
 
-
-
+$('#company3').blur(function(){
+	gdAPICompany($('#company3').val());
+});
 
 function clarifyQuery(company, gdAPIData) {
 	$('#queryNoMatchModal').modal('show');
