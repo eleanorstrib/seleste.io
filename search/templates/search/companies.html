@@ -72,18 +72,16 @@
 	        <p>Your query for wasn't an exact match with any company -- did you mean one of the ones below?<br />
 	        </p>
 	        <div id="company-clarify-select">
-	       		<form name="clarify-query-form" >
-	        	<tr>
-	        		<td><input type="radio" name="none" value="none"></td>
-	   				<td><label for="none">&nbspNone of the above</label></td>
-	        	</tr>
+	       		<form id="clarifyCompanyForm" name="clarifyCompanyForm" >
+	        	
+	        	<!-- filled in with jQuery/JavaScript -->
 	        	
 	        	</form>
 	        </div>
 	        </p>
 	      </div>
 	      <div class="modal-footer">
-	        <button type="button" class="btn btn-default" data-dismiss="modal">select & close</button>
+	        <button type="button" class="btn btn-default" id="clarify-button" data-dismiss="modal">select & close</button>
 	      </div>
 	    </div>
 

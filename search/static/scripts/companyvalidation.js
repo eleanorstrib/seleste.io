@@ -157,7 +157,7 @@ function gdAPICompany(company){
 					success: function(data){
 						var gdJSONResult = JSON.stringify(data.response);
 						gdJSONResult = JSON.parse(gdJSONResult);
-						console.log(gdJSONResult.employers);
+						console.log("this is employers after API call" + gdJSONResult.employers);
 						if ((gdJSONResult.employers).length === 1){
 							gdAPICompanyResults.push(gdJSONResult.employeers);
 							console.log('gdAPICompanyResults updated!');
@@ -175,17 +175,22 @@ function gdAPICompany(company){
 };
 
 
-function clarifyQuery(company, gdJSONResult) {
-	$('#queryNoMatchModal').modal('show');
-	jQuery.each(gdJSONResult.employers, function(i) {
-		var option = gdJSONResult.employers[i].name;
-		var addLine = "<tr><td><input type=\"radio\" name=\"company-clarified\" value=\"" + option + "\" id=\"radio- " + option + "\"></td><td><label for= \"" + option + "\">&nbsp" + option + "</label></td></tr>";
-		$('#company-clarify-select').append(addLine);
+	function clarifyQuery(company, gdJSONResult) {
+		$('#queryNoMatchModal').modal('show');
+		jQuery.each(gdJSONResult.employers, function(i) {
+			var option = gdJSONResult.employers[i].name;
+			var addLine = "<tr><td><input type=\"radio\" class=\"company-clarified\" name=\"company-clarified\" value=\"" + option + "\" id=\"radio- " + option + "\"></td><td><label for= \"" + option + "\">&nbsp" + option + "</label></td></tr>";
+			$('#company-clarify-select').append(addLine);
+		});
+	};
+
+	
+	$('#clarify-button').click(function(){
+		console.log($('.company-clarified:checked').val());
 	});
-};
+
 
 	// run API query on validation when user gets out of the field
-
 	$('#company1').blur(function(){
 		gdAPICompany($('#company1').val());
 	});
