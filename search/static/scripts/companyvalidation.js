@@ -177,6 +177,7 @@ function gdAPICompany(company){
 
 	function clarifyQuery(company, gdJSONResult) {
 		$('#queryNoMatchModal').modal('show');
+		console.log(gdJSONResult.employers);
 		jQuery.each(gdJSONResult.employers, function(i) {
 			var option = gdJSONResult.employers[i].name;
 			var addLine = "<tr><td><input type=\"radio\" class=\"company-clarified\" name=\"company-clarified\" value=\"" + option + "\" id=\"radio- " + option + "\"></td><td><label for= \"" + option + "\">&nbsp" + option + "</label></td></tr>";
@@ -185,8 +186,9 @@ function gdAPICompany(company){
 	};
 
 	
-	$('#clarify-button').click(function(){
+	$('#clarify-button').click(function(gdJSONResult){
 		console.log($('.company-clarified:checked').val());
+		$('#company-clarify-select').empty();
 	});
 
 
