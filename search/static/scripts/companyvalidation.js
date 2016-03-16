@@ -164,7 +164,7 @@ $(document).ready(function(){
 								return gdAPICompanyResults;
 							} else {
 								clarifyQueryModal(company, gdJSONResult);
-								selectedCompany(gdJSONResult, gdAPICompanyResults);
+								selectedCompany(company, gdJSONResult, gdAPICompanyResults);
 								cancelClarify();
 							}
 						},
@@ -185,14 +185,15 @@ $(document).ready(function(){
 			$('#company-clarify-select').append(addLine);
 		});
 	};
-	function selectedCompany(gdJSONResult, gdAPICompanyResults){
+	function selectedCompany(company, gdJSONResult, gdAPICompanyResults){
 		$('#clarify-button').click(function(){
-			var clarifySelection = $('.company-clarified:checked').val();
-			var addToArray = gdJSONResult.employers[clarifySelection];
+			var clarifySelectionIndex = $('.company-clarified:checked').val();
+			var clarifySelectionName = gdJSONResult.employers[clarifySelectionIndex].name;
+			var addToArray = gdJSONResult.employers[clarifySelectionIndex];
 			if (addToArray != undefined) {
 				gdAPICompanyResults.push(addToArray);
 			}
-			
+			$('#company1').val(clarifySelectionName);
 			console.log(gdAPICompanyResults);
 			$('#company-clarify-select').empty();
 		});
