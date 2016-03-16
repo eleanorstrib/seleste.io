@@ -190,7 +190,9 @@ $(document).ready(function(){
 
 	function selectedCompany(company, companyID, gdJSONResult, gdAPICompanyResults){
 		$('#clarify-button').click(function(){
-			var clarifySelectionIndex = parseInt($('.company-clarified:checked').val());
+			var clarifySelectionIndex = parseInt($('.company-clarified:checked').val()) || 0;
+			console.log(typeof(clarifySelectionIndex));
+			console.log(clarifySelectionIndex);
 			var clarifySelectionName = gdJSONResult.employers[clarifySelectionIndex].name;
 			console.log("checking ");
 			console.log(gdJSONResult.employers[clarifySelectionIndex]);
@@ -201,7 +203,6 @@ $(document).ready(function(){
 			}
 			$(companyID).val(clarifySelectionName);
 			$(companyID).attr("disabled", "disabled"); 
-			console.log(gdJSONResult + " gdJSONRESULT CLEAR?");
 			$('#company-clarify-select').empty();
 		});
 	};
