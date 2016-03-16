@@ -158,7 +158,7 @@ $(document).ready(function(){
 							gdJSONResult = JSON.parse(gdJSONResult);
 
 							if ((gdJSONResult.employers).length === 1) {
-								gdAPICompanyResults.push(gdJSONResult.employers);
+								gdAPICompanyResults.push(gdJSONResult.employers[0]);
 								console.log('gdAPICompanyResults updated!');
 								console.log(gdAPICompanyResults);
 								return gdAPICompanyResults;
