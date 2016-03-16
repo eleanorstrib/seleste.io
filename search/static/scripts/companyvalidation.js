@@ -141,7 +141,8 @@ $(document).ready(function(){
 	}
 
 	var gdAPICompanyResults = [];
-	function gdAPICompany(company){
+	function gdAPICompany(company, companyID){
+			var searchID = companyID;
 			company = company.toLowerCase()
 			var userAgent=($.client.browser).toLowerCase();
 			
@@ -164,7 +165,7 @@ $(document).ready(function(){
 								return gdAPICompanyResults;
 							} else {
 								clarifyQueryModal(company, gdJSONResult);
-								selectedCompany(company, gdJSONResult, gdAPICompanyResults);
+								selectedCompany(company, companyID, gdJSONResult, gdAPICompanyResults);
 								cancelClarify();
 							}
 						},
@@ -185,19 +186,26 @@ $(document).ready(function(){
 			$('#company-clarify-select').append(addLine);
 		});
 	};
-	function selectedCompany(company, gdJSONResult, gdAPICompanyResults){
+
+
+	function selectedCompany(company, companyID, gdJSONResult, gdAPICompanyResults){
 		$('#clarify-button').click(function(){
-			var clarifySelectionIndex = $('.company-clarified:checked').val();
+			var clarifySelectionIndex = parseInt($('.company-clarified:checked').val());
 			var clarifySelectionName = gdJSONResult.employers[clarifySelectionIndex].name;
+			console.log("checking ");
+			console.log(gdJSONResult.employers[clarifySelectionIndex]);
+			var clarifySelectionLogo = gdJSONResult.employers[clarifySelectionIndex].squareLogo;
 			var addToArray = gdJSONResult.employers[clarifySelectionIndex];
 			if (addToArray != undefined) {
 				gdAPICompanyResults.push(addToArray);
 			}
-			$('#company1').val(clarifySelectionName);
-			console.log(gdAPICompanyResults);
+			$(companyID).val(clarifySelectionName);
+			$(companyID).attr("disabled", "disabled"); 
+			console.log(gdJSONResult + " gdJSONRESULT CLEAR?");
 			$('#company-clarify-select').empty();
 		});
 	};
+
 
 	function cancelClarify(){
 		$('#cancel-button').click(function(){
@@ -208,15 +216,15 @@ $(document).ready(function(){
 
 	// run API query on validation when user gets out of the field
 	$('#company1').blur(function(){
-		gdAPICompany($('#company1').val());
+		gdAPICompany($('#company1').val(), '#company1');
 	});
 
 	$('#company2').blur(function(){
-		gdAPICompany($('#company2').val());
+		gdAPICompany($('#company2').val(), '#company2');
 	});
 
 	$('#company3').blur(function(){
-		gdAPICompany($('#company3').val());
+		gdAPICompany($('#company3').val(), '#company3');
 	});
 
 
