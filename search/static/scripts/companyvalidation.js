@@ -156,10 +156,9 @@ $(document).ready(function(){
 						success: function(data){
 							var gdJSONResult = JSON.stringify(data.response);
 							gdJSONResult = JSON.parse(gdJSONResult);
-							console.log("this is employers after API call" + gdJSONResult.employers);
-							if ((gdJSONResult.employers).length === 1){
-								console.log(gdJSONResult);
-								gdAPICompanyResults.push(gdJSONResult.employeers);
+
+							if ((gdJSONResult.employers).length === 1) {
+								gdAPICompanyResults.push(gdJSONResult.employers);
 								console.log('gdAPICompanyResults updated!');
 								console.log(gdAPICompanyResults);
 								return gdAPICompanyResults;
