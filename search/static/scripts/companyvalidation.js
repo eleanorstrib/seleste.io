@@ -165,6 +165,7 @@ $(document).ready(function(){
 							} else {
 								clarifyQueryModal(company, gdJSONResult);
 								selectedCompany(gdJSONResult, gdAPICompanyResults);
+								cancelClarify();
 							}
 						},
 						error: function(){
@@ -188,11 +189,21 @@ $(document).ready(function(){
 		$('#clarify-button').click(function(){
 			var clarifySelection = $('.company-clarified:checked').val();
 			var addToArray = gdJSONResult.employers[clarifySelection];
-			gdAPICompanyResults.push(addToArray);
+			if (addToArray != undefined) {
+				gdAPICompanyResults.push(addToArray);
+			}
+			
 			console.log(gdAPICompanyResults);
 			$('#company-clarify-select').empty();
 		});
 	};
+
+	function cancelClarify(){
+		$('#cancel-button').click(function(){
+			var clarifySelection = $('.company-clarified:checked').val('');
+			$('#company-clarify-select').empty();
+		});
+	}
 
 	// run API query on validation when user gets out of the field
 	$('#company1').blur(function(){
