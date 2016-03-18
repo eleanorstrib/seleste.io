@@ -3,19 +3,43 @@
 
 $(document).ready(function(){
 
+	var finalCompanyData = [];
 
 	$('#company1').blur(function(){
-
+		var searchBoxID = "company1";
 		gdAPICompany($('#company1').val(), function(data){
 			if (data === null) {
 				alert("there was an error");
 			} else {
 				console.log("no errors!");
-				writeData(data);
+				writeData(data, searchBoxID);
 			}
 		});	
 	});
 
+	$('#company2').blur(function(){
+		var searchBoxID = "company2";
+		gdAPICompany($('#company2').val(), function(data){
+			if (data === null) {
+				alert("there was an error");
+			} else {
+				console.log("no errors!");
+				writeData(data, searchBoxID);
+			}
+		});	
+	});
+
+	$('#company3').blur(function(){
+		var searchBoxID = "company3";
+		gdAPICompany($('#company3').val(), function(data){
+			if (data === null) {
+				alert("there was an error");
+			} else {
+				console.log("no errors!");
+				writeData(data, searchBoxID);
+			}
+		});	
+	});
 
 
 	// includes callback for API call 
@@ -25,9 +49,10 @@ $(document).ready(function(){
 	};
 
 
-	function writeData(gdAPIData){
-		$('#company1').val(gdAPIData.employers[0].name);
-		$('#company1-img').prepend('<img src="' + gdAPIData.employers[0].squareLogo + '"width="100" />');
+	function writeData(gdAPIData, searchBoxID){
+		 console.log("'#"+searchBoxID+"'");
+		$('#' + searchBoxID).val(gdAPIData.employers[0].name);
+		$('#' + searchBoxID + '-img').prepend('<img src="' + gdAPIData.employers[0].squareLogo + '"width="100" />');
 		console.log('writeData');
 	}
 		
@@ -52,9 +77,11 @@ $(document).ready(function(){
 						var gdJSONResult = JSON.stringify(data.response);
 						gdJSONResult = JSON.parse(gdJSONResult);
 						callback(gdJSONResult);
-						if (gdJSONResult != undefined){
-							console.log(gdJSONResult.employers[0].name);
-							alert(gdJSONResult.employers[0].name);
+						if (gdJSONResult.employers.length === 1){
+							finalCompanyData.push(gdJSONResult.employers);
+							console.log(finalCompanyData);
+						} else {
+							clarifyQueryModal(company, gdJSONResult);
 						}
 					},
 					error: function(){
@@ -82,15 +109,17 @@ $(document).ready(function(){
 	// };
 
 
-	// function clarifyQueryModal(company, gdJSONResult) {
-	// 	$('#queryNoMatchModal').modal('show');
-	// 	console.log("ClarifyModaul ok");
-	// 	jQuery.each(gdJSONResult.employers, function(i) {
-	// 		var option = gdJSONResult.employers[i].name;
-	// 		var addLine = "<tr><td><input type=\"radio\" class=\"company-clarified\" name=\"company-clarified\" value=\"" + i + "\" id=\"radio- " + option + "\"></td><td><label for= \"" + option + "\">&nbsp" + option + "</label></td></tr>";
-	// 		$('#company-clarify-select').append(addLine);
-	// 	});
-	// };
+	// this function shows a modal with all fo the employer 
+	// names from GD API call
+	function clarifyQueryModal(company, gdJSONResult) {
+		$('#queryNoMatchModal').modal('show');
+		console.log("ClarifyModaul ok");
+		jQuery.each(gdJSONResult.employers, function(i) {
+			var option = gdJSONResult.employers[i].name;
+			var addLine = "<tr><td><input type=\"radio\" class=\"company-clarified\" name=\"company-clarified\" value=\"" + i + "\" id=\"radio- " + option + "\"></td><td><label for= \"" + option + "\">&nbsp" + option + "</label></td></tr>";
+			$('#company-clarify-select').append(addLine);
+		});
+	};
 
 
 
