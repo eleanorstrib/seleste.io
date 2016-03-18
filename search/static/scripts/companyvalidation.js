@@ -141,8 +141,7 @@ $(document).ready(function(){
 	}
 
 	var gdAPICompanyResults = [];
-	function gdAPICompany(company, companyID){
-			var searchID = companyID;
+	function gdAPICompany(company, callback){
 			company = company.toLowerCase()
 			var userAgent=($.client.browser).toLowerCase();
 			
@@ -155,19 +154,24 @@ $(document).ready(function(){
 						},
 						dataType: 'jsonp',
 						success: function(data){
+							console.log("API Call ok");
 							var gdJSONResult = JSON.stringify(data.response);
 							gdJSONResult = JSON.parse(gdJSONResult);
 
 							if ((gdJSONResult.employers).length === 1) {
 								gdAPICompanyResults.push(gdJSONResult.employers[0]);
-								console.log('gdAPICompanyResults updated!');
 								console.log(gdAPICompanyResults);
 								return gdAPICompanyResults;
 							} else {
 								clarifyQueryModal(company, gdJSONResult);
-								selectedCompany(company, companyID, gdJSONResult, gdAPICompanyResults);
+								selectedCompanyCheck(callback, function(data, error){
+									console.log(error);
+									console.log(data);
+								});
 								cancelClarify();
+								return gdJSONResult;
 							}
+							callback(gdJSONResult);
 						},
 						error: function(){
 							console.log("didn't work");
@@ -175,11 +179,15 @@ $(document).ready(function(){
 						type: 'GET'
 					});
 			};
+			console.log('first');
 	};
+			
+
 
 
 	function clarifyQueryModal(company, gdJSONResult) {
 		$('#queryNoMatchModal').modal('show');
+		console.log("ClarifyModaul ok");
 		jQuery.each(gdJSONResult.employers, function(i) {
 			var option = gdJSONResult.employers[i].name;
 			var addLine = "<tr><td><input type=\"radio\" class=\"company-clarified\" name=\"company-clarified\" value=\"" + i + "\" id=\"radio- " + option + "\"></td><td><label for= \"" + option + "\">&nbsp" + option + "</label></td></tr>";
@@ -188,44 +196,59 @@ $(document).ready(function(){
 	};
 
 
-	function selectedCompany(company, companyID, gdJSONResult, gdAPICompanyResults){
+	function selectedCompanyCheck(callback, data){
+		console.log("selectedCompanyCheck");
+	};
+
+	function getCompanyData(callback, data) {
+		console.log("in function getCompanyData");
 		$('#clarify-button').click(function(){
+
+			console.log("selectedCompany");
+			console.log(gdJSONResult);
 			var clarifySelectionIndex = parseInt($('.company-clarified:checked').val()) || 0;
-			console.log(typeof(clarifySelectionIndex));
-			console.log(clarifySelectionIndex);
 			var clarifySelectionName = gdJSONResult.employers[clarifySelectionIndex].name;
-			console.log("checking ");
-			console.log(gdJSONResult.employers[clarifySelectionIndex]);
 			var clarifySelectionLogo = gdJSONResult.employers[clarifySelectionIndex].squareLogo;
 			var addToArray = gdJSONResult.employers[clarifySelectionIndex];
 			if (addToArray != undefined) {
 				gdAPICompanyResults.push(addToArray);
 			}
-			$(companyID).val(clarifySelectionName);
-			$(companyID).attr("disabled", "disabled"); 
 			$('#company-clarify-select').empty();
 		});
 	};
 
-
 	function cancelClarify(){
 		$('#cancel-button').click(function(){
+			console.log("cancelClarify");
 			var clarifySelection = $('.company-clarified:checked').val('');
 			$('#company-clarify-select').empty();
 		});
 	}
 
+
 	// run API query on validation when user gets out of the field
+	
 	$('#company1').blur(function(){
-		gdAPICompany($('#company1').val(), '#company1');
+
+		gdAPICompany($('#company1').val(), function(error, data){
+			if (error) {
+				alert("there was an error");
+			} else {
+				console.log("second");
+				console.log(gdAPICompanyResults);
+			}
+		});
+				
 	});
 
+
+
 	$('#company2').blur(function(){
-		gdAPICompany($('#company2').val(), '#company2');
+		gdAPICompany($('#company2').val());
 	});
 
 	$('#company3').blur(function(){
-		gdAPICompany($('#company3').val(), '#company3');
+		gdAPICompany($('#company3').val());
 	});
 
 
