@@ -71,7 +71,7 @@
 	      </div>
 	      <div class="modal-body">
 	        <p>Your query for wasn't an exact match with any company -- did you mean one of the ones below?<br />
-	        </p>
+
 	        <div id="company-clarify-select">
 	       		<form id="clarifyCompanyForm" name="clarifyCompanyForm" >
 	        	
@@ -86,6 +86,28 @@
 	        <button type="button" class="btn btn-default" id="clarify-button" data-dismiss="modal">select & close</button>
 	      </div>
 	    </div>
+	    
+	</div>
+	</div>
+
+		<!-- Modal content-->
+
+		<div id="gd-error-modal" class="modal fade" role="dialog">
+		  <div class="modal-dialog">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <h4 class="modal-title">Uh oh</h4>
+		      </div>
+		      <div class="modal-body">
+		        We were unable to contact the Glassdoor API.<br />
+		        Please try again later.
+		      </div>
+		      <div class="modal-footer">
+		      	<button type="button" class="btn btn-default" id="cancel-button" data-dismiss="modal">close</button>
+		      </div>
+		    </div>
+		  </div>
+		</div>
 
 	  </div>
 	</div>

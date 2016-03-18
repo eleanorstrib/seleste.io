@@ -2,14 +2,13 @@
 	
 
 $(document).ready(function(){
-
 	var finalCompanyData = [];
 
 	$('#company1').blur(function(){
 		var searchBoxID = "company1";
 		gdAPICompany($('#company1').val(), function(data){
 			if (data === null) {
-				alert("there was an error");
+				$('#gd-error-modal').modal('show');
 			} else {
 				console.log("no errors!");
 				writeData(data, searchBoxID);
@@ -21,7 +20,7 @@ $(document).ready(function(){
 		var searchBoxID = "company2";
 		gdAPICompany($('#company2').val(), function(data){
 			if (data === null) {
-				alert("there was an error");
+				$('#gd-error-modal').modal('show');
 			} else {
 				console.log("no errors!");
 				writeData(data, searchBoxID);
@@ -33,7 +32,7 @@ $(document).ready(function(){
 		var searchBoxID = "company3";
 		gdAPICompany($('#company3').val(), function(data){
 			if (data === null) {
-				alert("there was an error");
+				$('#gd-error-modal').modal('show');
 			} else {
 				console.log("no errors!");
 				writeData(data, searchBoxID);
@@ -85,14 +84,12 @@ $(document).ready(function(){
 						}
 					},
 					error: function(){
-						alert("didn't work");
+						$('#gd-error-modal').modal('show');
 						return null;
 					},
 						type: 'GET'
 				});
 		}
-		
-		console.log("API data attempted");
 	};
 
 
