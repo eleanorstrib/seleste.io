@@ -6,58 +6,65 @@ $(document).ready(function(){
 
 	$('#company1').blur(function(){
 		var searchBoxID = "company1";
-		gdAPICompany($('#company1').val(), function(data){
+		gdAPICompany($('#company1').val(), function(data, selectedCompanyIndex){
 			if (data === null) {
 				$('#gd-error-modal').modal('show');
 			} else {
-				console.log("no errors!");
-				writeData(data, searchBoxID);
+				writeData(data, searchBoxID, selectedCompanyIndex);
 			}
 		});	
 	});
 
 	$('#company2').blur(function(){
 		var searchBoxID = "company2";
-		gdAPICompany($('#company2').val(), function(data){
+		gdAPICompany($('#company2').val(), function(data, selectedCompanyIndex){
 			if (data === null) {
 				$('#gd-error-modal').modal('show');
 			} else {
 				console.log("no errors!");
-				writeData(data, searchBoxID);
+				writeData(data, searchBoxID, selectedCompanyIndex);
 			}
 		});	
 	});
 
 	$('#company3').blur(function(){
 		var searchBoxID = "company3";
-		gdAPICompany($('#company3').val(), function(data){
+		gdAPICompany($('#company3').val(), function(data, selectedCompanyIndex){
 			if (data === null) {
 				$('#gd-error-modal').modal('show');
 			} else {
 				console.log("no errors!");
-				writeData(data, searchBoxID);
+				writeData(data, searchBoxID, selectedCompanyIndex);
 			}
 		});	
 	});
 
 
-	// includes callback for API call 
-	// GET DATA
+	// manages data fetching from glassdoor API
 	function gdAPICompany(company, callback){
 		var gdAPIData = glassdoorAPIData(company, callback);
 	};
 
+	// manages data fetching from clarification modal
+	function userClarifySelect(callback) {
+		var userSelection = clarifySelect(callback);
+		console.log("userSelection " + userSelection);
+	};
 
-	function writeData(gdAPIData, searchBoxID){
-		 console.log("'#"+searchBoxID+"'");
-		$('#' + searchBoxID).val(gdAPIData.employers[0].name);
-		$('#' + searchBoxID + '-img').prepend('<img src="' + gdAPIData.employers[0].squareLogo + '"width="100" />');
+
+	// shows company logo on screen, hides search box
+	function writeData(gdAPIData, searchBoxID, selectedCompanyIndex) {
+		console.log(gdAPIData);
+		console.log(searchBoxID);
+		console.log(selectedCompanyIndex);
+		$('#' + searchBoxID).hide();
+		var logoURL = gdAPIData.employers[selectedCompanyIndex].squareLogo
+		$('#' + searchBoxID + '-img').prepend('<img src="' + logoURL + '"width="100" />');
 		console.log('writeData');
-	}
+	};
 		
 
 	// calls Glassdoor API and returns JSON results
-	// GETSOMEDATA
     function glassdoorAPIData(company, callback) {
     	company = company.toLowerCase()
 		var userAgent='chrome';
@@ -75,13 +82,28 @@ $(document).ready(function(){
 						console.log("API Call ok");
 						var gdJSONResult = JSON.stringify(data.response);
 						gdJSONResult = JSON.parse(gdJSONResult);
-						callback(gdJSONResult);
+						
+						
+						var selectedCompanyIndex = 0;
+						
 						if (gdJSONResult.employers.length === 1){
+							callback(gdJSONResult, selectedCompanyIndex);
 							finalCompanyData.push(gdJSONResult.employers);
-							console.log(finalCompanyData);
 						} else {
 							clarifyQueryModal(company, gdJSONResult);
+							console.log(gdJSONResult);
+							clarifySelect(function(selectedCompanyIndex){
+								if (selectedCompanyIndex != null) {
+									callback(gdJSONResult, selectedCompanyIndex);
+								}
+								finalCompanyData.push(gdJSONResult.employers[selectedCompanyIndex]);
+							});
+							cancelClarify();
+							
 						}
+
+						
+
 					},
 					error: function(){
 						$('#gd-error-modal').modal('show');
@@ -93,24 +115,10 @@ $(document).ready(function(){
 	};
 
 
-
-	
-	// function handleAPIResults(gdAPIData){
-	// 	if ((gdAPIData.employers).length === 1) {
-	// 			gdAPICompanyResults.push(gdAPIData.employers[0]);
-	// 			console.log(gdAPIData);
-	// 			return gdAPICompanyResults;
-	// 		} else {
-	// 			console.log("nooO!!");
-	// 		}
-	// };
-
-
 	// this function shows a modal with all fo the employer 
 	// names from GD API call
 	function clarifyQueryModal(company, gdJSONResult) {
 		$('#queryNoMatchModal').modal('show');
-		console.log("ClarifyModaul ok");
 		jQuery.each(gdJSONResult.employers, function(i) {
 			var option = gdJSONResult.employers[i].name;
 			var addLine = "<tr><td><input type=\"radio\" class=\"company-clarified\" name=\"company-clarified\" value=\"" + i + "\" id=\"radio- " + option + "\"></td><td><label for= \"" + option + "\">&nbsp" + option + "</label></td></tr>";
@@ -120,31 +128,22 @@ $(document).ready(function(){
 
 
 
-	// function writeCompanyData(gdJSONResult) {
-	// 	console.log("in function getCompanyData");
-	// 	$('#clarify-button').click(function(){
-	// 		console.log("selectedCompany");
-	// 		console.log(gdJSONResult);
-	// 		var clarifySelectionIndex = parseInt($('.company-clarified:checked').val()) || 0;
-	// 		var clarifySelectionName = gdJSONResult.employers[clarifySelectionIndex].name;
-	// 		var clarifySelectionLogo = gdJSONResult.employers[clarifySelectionIndex].squareLogo;
-	// 		var addToArray = gdJSONResult.employers[clarifySelectionIndex];
-	// 		if (addToArray != undefined) {
-	// 			gdAPICompanyResults.push(addToArray);
-	// 		}
-	// 		$('#company-clarify-select').empty();
-	// 	});
-	// };
+	function clarifySelect(callback) {
+		$('#clarify-button').click(function(){
+			var selectedCompanyIndex = parseInt($('.company-clarified:checked').val());
+			$('#company-clarify-select').empty();
+			callback(selectedCompanyIndex);
+		return selectedCompanyIndex;
+		});
+	};
 
-	// function cancelClarify(){
-	// 	$('#cancel-button').click(function(){
-	// 		console.log("cancelClarify");
-	// 		var clarifySelection = $('.company-clarified:checked').val('');
-	// 		$('#company-clarify-select').empty();
-	// 	});
-	// }
+
+	function cancelClarify(){
+		$('#cancel-button').click(function(){
+			$('#company-clarify-select').empty();
+		});
+	}
 });
 
-	// run API query on validation when user gets out of the field
 	
 	

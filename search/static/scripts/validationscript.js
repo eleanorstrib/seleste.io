@@ -65,13 +65,13 @@ $(document).ready(function(){
 		var currentTotal = sumTotal()
 		if (currentTotal < 100) {
 			$('div.total-msg').html("You've allocated " + currentTotal + " points. " + (100-currentTotal) + " left!");
-			$('button[type=submit]').attr('disabled', 'disabled');
+			$('input[type=submit]').prop('disabled', true);
 			return false;
 		} else if (currentTotal === 100) {
 			$('div.total-msg').html("Nice work!  You've allocated all 100 points.");
 			return true;
 		} else {
-			$('button[type=submit]').attr('disabled', 'disabled');
+			$('input[type=submit]').prop('disabled', true);
 			$('div.total-msg').html("Oops, you've over allocated by " + (currentTotal-100) + " points.  Try rebalancing.");
 			return false;
 		}
@@ -91,7 +91,6 @@ $(document).ready(function(){
 	// 		$('div.total-msg').html("Your allocations need to add up to 100 before you can continue.")
 	// 	};
 	// });
-
 
 });
 

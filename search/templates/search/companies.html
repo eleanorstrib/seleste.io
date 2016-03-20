@@ -52,7 +52,7 @@
 	<div class="row">
 		<div class="col-md-5"></div>
 		<div class="col-md-2">
-			<button type="submit" class="btn btn-default" id="companies-submit" name="next-results">see results</button>
+			<button type="submit" class="btn btn-default" id="companies-submit" name="next-results" onclick="location.href='{% url 'results' %}'">see results</button>
 		</div>
 		<div class="col-md-5"></div>
 	</div>
@@ -74,9 +74,7 @@
 
 	        <div id="company-clarify-select">
 	       		<form id="clarifyCompanyForm" name="clarifyCompanyForm" >
-	        	
 	        	<!-- filled in with jQuery/JavaScript -->
-	        	
 	        	</form>
 	        </div>
 	        </p>
@@ -86,7 +84,7 @@
 	        <button type="button" class="btn btn-default" id="clarify-button" data-dismiss="modal">select & close</button>
 	      </div>
 	    </div>
-	    
+
 	</div>
 	</div>
 
