@@ -50,10 +50,9 @@ $(document).ready(function(){
 
 	// shows company logo on screen, hides search box
 	function writeData(gdAPIData, searchBoxID, selectedCompanyIndex) {
-		console.log(gdAPIData);
-		console.log(searchBoxID);
-		console.log(selectedCompanyIndex);
-		$('#' + searchBoxID).hide();
+
+		$('#' + searchBoxID).val(gdAPIData.employers[selectedCompanyIndex].name);
+		$('#' + searchBoxID).prop('disabled', true);
 		var logoURL = gdAPIData.employers[selectedCompanyIndex].squareLogo
 		$('#' + searchBoxID + '-img').prepend('<img src="' + logoURL + '"width="100" />');
 		console.log('writeData');

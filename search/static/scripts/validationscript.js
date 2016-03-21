@@ -69,6 +69,7 @@ $(document).ready(function(){
 			return false;
 		} else if (currentTotal === 100) {
 			$('div.total-msg').html("Nice work!  You've allocated all 100 points.");
+			saveToSession();
 			return true;
 		} else {
 			$('input[type=submit]').prop('disabled', true);
@@ -77,20 +78,24 @@ $(document).ready(function(){
 		}
 	};
 
-	// $("#priorities-form").on('submit', function(e) {
-	// 	e.preventDefault();
-	// 	if (checkTotal()) {
-	// 		priorities.culturevalues = parseInt(($('input#culturevalues').val()));
-	// 		priorities.opportunities = parseInt(($('input#opportunities').val()));
-	// 		priorities.management = parseInt(($('input#management').val()));
-	// 		priorities.compensationbenefits = parseInt(($('input#compensationbenefits').val()));
-	// 		priorities.worklifebalance = parseInt(($('input#worklifebalance').val()));
-	// 		localStorage.setItem("priorities", JSON.stringify(priorities));
-	// 	} else {
-	// 		// this is a failsafe, button should be disabled in checkTotal anyway
-	// 		$('div.total-msg').html("Your allocations need to add up to 100 before you can continue.")
-	// 	};
-	// });
+	function saveToSession() {
+		if (checkTotal()) {
+			priorities.culturevalues = parseInt(($('input#culturevalues').val()));
+			priorities.opportunities = parseInt(($('input#opportunities').val()));
+			priorities.management = parseInt(($('input#management').val()));
+			priorities.compensationbenefits = parseInt(($('input#compensationbenefits').val()));
+			priorities.worklifebalance = parseInt(($('input#worklifebalance').val()));
+			localStorage.setItem("priorities", JSON.stringify(priorities));
+			console.log(localStorage);
+		} else {
+			// this is a failsafe, button should be disabled in checkTotal anyway
+			$('div.total-msg').html("Your allocations need to add up to 100 before you can continue.")
+		};
+	};
+
+	$("#priorities-form").on('submit', function(e) {
+		e.preventDefault();
+	});
 
 });
 
