@@ -56,6 +56,15 @@ $(document).ready(function(){
 
 	});
 
+	$("#companies-submit").on('click',function(e){
+		e.preventDefault();
+		postToServer(finalCompanyData, function(data){
+			if (data === undefined) {
+				alert("there was an error!");
+			}
+		});
+		
+	});
 
 	// manages data fetching from glassdoor API
 	function gdAPICompany(company, callback){
@@ -101,14 +110,7 @@ $(document).ready(function(){
 							callback(gdJSONResult, selectedCompanyIndex);
 							finalCompanyData.push(gdJSONResult.employers[selectedCompanyIndex]);
 							console.log(finalCompanyData);
-							finalCompanyDataStr = JSON.stringify(finalCompanyData);
-							$.ajax({
-								type: "POST",
-								contentType: "application/JSON",
-								url: "/results/",
-								data: finalCompanyDataStr,
-								dataType: JSON,
-							});
+							
 						} else {
 							clarifyQueryModal(company, gdJSONResult);
 							console.log(gdJSONResult);
@@ -168,16 +170,16 @@ $(document).ready(function(){
 	}
 
 
-	function postToServer(){
-		$.post(URL, finalCompanyData, function(respose) {
-			if(response === 'success') {
-				console.log("post was a success");
-			} else {
-				console.log("post was a fail");
-			}
+	function postToServer(finalCompanyData, callback){
+		finalCompanyDataStr = JSON.stringify(finalCompanyData);
+		$.ajax({
+			type: "POST",
+			contentType: "application/JSON",
+			url: "/results/",
+			data: finalCompanyDataStr,
+			dataType: JSON,
 		});
-
-	};
+	}
 });
 
 	

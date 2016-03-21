@@ -14,5 +14,5 @@ def companies(request):
 
 def results(request):
 	data= request.body
-	print(data, "data")
+	print(data)
 	return render(request, 'search/results.html', {})
