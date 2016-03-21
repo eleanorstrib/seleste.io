@@ -2,7 +2,22 @@
 	
 
 $(document).ready(function(){
+	//CSRF settings for every Ajax call
+	function csrfSafeMethod(method) {
+    // these HTTP methods do not require CSRF protection
+	    return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+	}
+	$.ajaxSetup({
+	    beforeSend: function(xhr, settings) {
+	        if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+	            xhr.setRequestHeader("X-CSRFToken", csrftoken);
+	        }
+	    }
+	});
+	//
 	var finalCompanyData = [];
+	var csrftoken = Cookies.get('csrftoken');
+	console.log(csrftoken);
 
 	$('#company1').blur(function(){
 		var searchBoxID = "company1";
@@ -86,8 +101,14 @@ $(document).ready(function(){
 							callback(gdJSONResult, selectedCompanyIndex);
 							finalCompanyData.push(gdJSONResult.employers[selectedCompanyIndex]);
 							console.log(finalCompanyData);
-							localStorage.setItem("gdCompanyData", JSON.stringify(finalCompanyData));
-							console.log(localStorage);
+							finalCompanyDataStr = JSON.stringify(finalCompanyData);
+							$.ajax({
+								type: "POST",
+								contentType: "application/JSON",
+								url: "/results/",
+								data: finalCompanyDataStr,
+								dataType: JSON,
+							});
 						} else {
 							clarifyQueryModal(company, gdJSONResult);
 							console.log(gdJSONResult);
@@ -145,6 +166,18 @@ $(document).ready(function(){
 			$('#company-clarify-select').empty();
 		});
 	}
+
+
+	function postToServer(){
+		$.post(URL, finalCompanyData, function(respose) {
+			if(response === 'success') {
+				console.log("post was a success");
+			} else {
+				console.log("post was a fail");
+			}
+		});
+
+	};
 });
 
 	
