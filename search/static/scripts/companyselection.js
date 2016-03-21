@@ -13,6 +13,7 @@ $(document).ready(function(){
 				writeData(data, searchBoxID, selectedCompanyIndex);
 			}
 		});	
+
 	});
 
 	$('#company2').blur(function(){
@@ -36,19 +37,14 @@ $(document).ready(function(){
 				console.log("no errors!");
 				writeData(data, searchBoxID, selectedCompanyIndex);
 			}
-		});	
+		});		
+
 	});
 
 
 	// manages data fetching from glassdoor API
 	function gdAPICompany(company, callback){
 		var gdAPIData = glassdoorAPIData(company, callback);
-	};
-
-	// manages data fetching from clarification modal
-	function userClarifySelect(callback) {
-		var userSelection = clarifySelect(callback);
-		console.log("userSelection " + userSelection);
 	};
 
 
@@ -61,7 +57,8 @@ $(document).ready(function(){
 		var logoURL = gdAPIData.employers[selectedCompanyIndex].squareLogo
 		$('#' + searchBoxID + '-img').prepend('<img src="' + logoURL + '"width="100" />');
 		console.log('writeData');
-	};
+
+	}; 
 		
 
 	// calls Glassdoor API and returns JSON results
@@ -76,7 +73,7 @@ $(document).ready(function(){
 					data: {
 						format: 'json'
 					},
-					dataType: 'json',
+					dataType: 'jsonp',
 					success: function(data){
 
 						console.log("API Call ok");
@@ -88,22 +85,21 @@ $(document).ready(function(){
 						
 						if (gdJSONResult.employers.length === 1){
 							callback(gdJSONResult, selectedCompanyIndex);
-							finalCompanyData.push(gdJSONResult.employers);
+							finalCompanyData.push(gdJSONResult.employers[selectedCompanyIndex]);
+							console.log(finalCompanyData);
 						} else {
 							clarifyQueryModal(company, gdJSONResult);
 							console.log(gdJSONResult);
 							clarifySelect(function(selectedCompanyIndex){
+								console.log("selectedCompanyIndex after callback is ", selectedCompanyIndex);
 								if (selectedCompanyIndex != null) {
 									callback(gdJSONResult, selectedCompanyIndex);
 								}
 								finalCompanyData.push(gdJSONResult.employers[selectedCompanyIndex]);
+								console.log(finalCompanyData);
 							});
 							cancelClarify();
-							
 						}
-
-						
-
 					},
 					error: function(){
 						$('#gd-error-modal').modal('show');
@@ -130,10 +126,13 @@ $(document).ready(function(){
 
 	function clarifySelect(callback) {
 		$('#clarify-button').click(function(){
-			var selectedCompanyIndex = parseInt($('.company-clarified:checked').val());
-			$('#company-clarify-select').empty();
+			selectedCompanyIndex = $('.company-clarified:checked').val();
+			console.log(selectedCompanyIndex);
+			console.log(typeof(selectedCompanyIndex));
 			callback(selectedCompanyIndex);
-		return selectedCompanyIndex;
+			$('#company-clarify-select').empty();
+			$('#clarify-button').unbind('click');
+			
 		});
 	};
 
