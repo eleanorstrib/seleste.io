@@ -55,7 +55,7 @@ $(document).ready(function(){
 		$('#' + searchBoxID).prop('disabled', true);
 		var logoURL = gdAPIData.employers[selectedCompanyIndex].squareLogo
 		$('#' + searchBoxID + '-img').prepend('<img src="' + logoURL + '"width="100" />');
-		console.log('writeData');
+
 
 	}; 
 		
@@ -86,6 +86,8 @@ $(document).ready(function(){
 							callback(gdJSONResult, selectedCompanyIndex);
 							finalCompanyData.push(gdJSONResult.employers[selectedCompanyIndex]);
 							console.log(finalCompanyData);
+							localStorage.setItem("gdCompanyData", JSON.stringify(finalCompanyData));
+							console.log(localStorage);
 						} else {
 							clarifyQueryModal(company, gdJSONResult);
 							console.log(gdJSONResult);
@@ -96,6 +98,8 @@ $(document).ready(function(){
 								}
 								finalCompanyData.push(gdJSONResult.employers[selectedCompanyIndex]);
 								console.log(finalCompanyData);
+								localStorage.setItem("gdCompanyData", JSON.stringify(finalCompanyData));
+								console.log(localStorage);
 							});
 							cancelClarify();
 						}
