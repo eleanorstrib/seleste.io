@@ -59,13 +59,14 @@
 			<div class="col-md-2"></div>
 		</div>
 
-		<div class="row">
-	
-				<input type="button" class="btn btn-default" id="priorities-submit" name="next-companies" onclick="location.href='{% url 'companies' %}';" value="next">
-
+		<div class="row next-button">
+			<div class="col-md-10"></div>
+			<div class"col-md-2">
+				<input type="button" class="btn btn-next btn-default" id="priorities-submit" name="next-companies" onclick="location.href='{% url 'companies' %}';" value="next">
+			</div>
 			</form>
 		</div>
 	</form>
-
+	<div><p></p><br /><p>Icons made by <a href="http://www.freepik.com" title="Freepik">Freepik</a>, <a href="http://www.flaticon.com/authors/yannick" title="Yannick">Yannick</a> from <a href="http://www.flaticon.com" title="Flaticon">www.flaticon.com </a>is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0">CC BY 3.0</a></p></div>
 
 {% endblock %}

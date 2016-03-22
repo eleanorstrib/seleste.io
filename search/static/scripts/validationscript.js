@@ -68,7 +68,7 @@ $(document).ready(function(){
 			$('input[type=submit]').prop('disabled', true);
 			return false;
 		} else if (currentTotal === 100) {
-			$('div.total-msg').html("Nice work!  You've allocated all 100 points.");
+			$('div.total-msg').html("Nice work!  You've allocated all 100 points. <br /> Click 'next' on the bottom of the screen to select companies to compare based on your priorites.");
 			saveToSession();
 			return true;
 		} else {

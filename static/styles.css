@@ -33,10 +33,12 @@ input[type='number'] {
 	border-width: 0px;
 	border: none;
 	text-align: center;
+	font-size: 1.4em;
 	width: 30px;
 	-webkit-appearance: none; 
-    -moz-appearance: none; 
+    -moz-appearance: textfield; 
     appearance:none;
+    vertical-align: middle;
 }
 
 input::-webkit-outer-spin-button,
@@ -50,8 +52,9 @@ img  {
 	max-width: 100%;
     height: auto;
 	width: 50px;
-		margin-left: auto;
+	margin-left: auto;
     margin-right: auto;
+
 }
 
 .title-text {
@@ -70,11 +73,16 @@ img  {
 	margin-left:auto;
 	margin-right:auto;
     display: block;
+    vertical-align: middle;
    /* top: 50%;
     left: 50%;
     margin-right: -50%;
     transform: translate(-50%, -50%)*/
 	
+}
+
+.btn-next {
+	text-align:center;
 }
 
 
