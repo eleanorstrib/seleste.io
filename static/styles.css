@@ -1,4 +1,46 @@
+
+
 body {
 
-	font-family: 'Open Sans', sans-serif;
+	font-family: 'Lato', sans-serif;
 }
+
+.navbar {
+	background-color: #F2D8F2; 
+	border-radius: 0px;
+	opacity: 0.75;
+}
+
+a {
+	font-family: 'Quicksand', sans-serif;
+}
+
+.navbar-brand {
+	font-family: 'Quicksand', sans-serif;
+	font-size: 2em;
+}
+
+
+.graphic-row {
+	height: 100px;
+}
+
+input[type='number'] {
+	border-width: 0px;
+	border: none;
+	text-align: right;
+}
+
+img  {
+	max-width: 100%;
+    height: auto;
+	width: 50px;
+}
+
+.title-text {
+	font-family: 'Quicksand', sans-serif;
+	font-size: 1.5em;
+	padding: 1.5em;
+	text-align: center;
+}
+/*#F2D8F2*/

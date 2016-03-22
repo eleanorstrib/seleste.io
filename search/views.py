@@ -9,14 +9,16 @@ def home(request):
 
 @ensure_csrf_cookie
 def companies(request):
-
 	return render_to_response('search/companies.html', {})
 
 
 def results(request):
-	data = request.body.decode()
-	data = json.loads(data)
+	data = request.body.decode('latin-1')
+	print (data)
 	print(type(data))
+	# gd_data = json.loads(data)
+	# print(type(gd_data))
+
 	# for record in gd_data:
 	# 	print(gd_data['name'])
 	# 	models.Company.company_name = gd_data['name']

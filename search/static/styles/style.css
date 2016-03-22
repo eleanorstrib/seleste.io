@@ -1,4 +1,4 @@
-
+/*
 img  {
 	max-width: 100%;
     height: auto;
@@ -10,12 +10,13 @@ img  {
 }
 
 
-
-svg {
-
-	fill: red;
-}
-
 .graphic-row {
 	height: 100px;
 }
+
+input[type='number'] {
+	border-width: 0px;
+	border: none;
+	text-align: right;
+}
+*/
