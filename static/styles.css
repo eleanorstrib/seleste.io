@@ -29,12 +29,43 @@ a {
 	height: 100px;
 }
 
-input[type='number'] {
-	border-width: 0px;
-	border: none;
+
+
+input[type='text'] {
+
+	border-width-top: 0px;
+	border-top: none;
+		border-width-right: 0px;
+	border-right: none;
+		border-width-left: 0px;
+	border-left: none;
+
+	border-bottom-color: #181B59;
+	border-bottom-width: 3px;
 	text-align: center;
 	font-size: 1.4em;
-	width: 30px;
+	width: 100%;
+	-webkit-appearance: none; 
+    -moz-appearance: textfield; 
+    appearance:none;
+    vertical-align: middle;
+}
+
+
+input[type='number'] {
+	border-width-top: 0px;
+	border-top: none;
+		border-width-right: 0px;
+	border-right: none;
+		border-width-left: 0px;
+	border-left: none;
+
+	border-bottom-color: #181B59;
+	border-bottom-width: 3px;
+	text-align: center;
+	vertical-align: middle;
+	font-size: 1.4em;
+	width: 100%;
 	-webkit-appearance: none; 
     -moz-appearance: textfield; 
     appearance:none;
@@ -48,7 +79,7 @@ input::-webkit-inner-spin-button {
     margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
 }
 
-img  {
+img.priorities-img {
 	max-width: 100%;
     height: auto;
 	width: 50px;
@@ -84,6 +115,16 @@ img  {
 .btn-next {
 	text-align:center;
 }
+ 
+.company-logo{
+	width:50%;
+	margin: 0 auto;
+	text-align: center;
+}
 
+label {
+	color: #181B59;
+	text-align: center;
+}
 
 /*#F2D8F2*/

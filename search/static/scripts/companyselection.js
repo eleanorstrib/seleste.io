@@ -78,7 +78,7 @@ $(document).ready(function(){
 		$('#' + searchBoxID).val(gdAPIData.employers[selectedCompanyIndex].name);
 		$('#' + searchBoxID).prop('disabled', true);
 		var logoURL = gdAPIData.employers[selectedCompanyIndex].squareLogo
-		$('#' + searchBoxID + '-img').prepend('<img src="' + logoURL + '"width="100" />');
+		$('#' + searchBoxID + '-img').prepend('<img src="' + logoURL + '" id="company-logo-gd"/>').slideDown(3000,"linear");
 
 
 	}; 

@@ -7,13 +7,15 @@
 <script type="text/javascript" src="/static/scripts/js.cookie.js"></script>
 <script type="text/javascript" src="../static/scripts/companyselection.js"></script>
 <link rel="stylesheet" type="text/css" href="../static/styles/style.css"></script>
+
+
 <div class="container">
 	<div class="row">
-		<div class="col-md-4"></div>
-		<div class="col-md-4 title-row">
+		<div class="col-md-2"></div>
+		<div class="col-md-8 title-text">
 			Which companies are you interested in?
 		</div>
-		<div class="col-md-4"></div>
+		<div class="col-md-2"></div>
 	</div>
 	<div class="row">
 		<div class="col-md-2"></div>
@@ -22,40 +24,42 @@
 		</div>
 		<div class="col-md-2"></div>
 	</div>
+	
+	<div class="row">
+		<form class="form-inline" id="companies-form" action="" method="post"> {% csrf_token%}
+		<div class="col-md-4">
+			<div class="form-group">
+				<label for "company one">Company One</label>
+				<input type="text" name="company1" id="company1" class="company" min="2" required> <br />
+				
+			</div>
+		</div>
+		<div class="col-md-4">
+			<div class="form-group">
+				<label for "company one">Company Two</label>
+				<input type="text" name="company2" id="company2" class="company" required> <br />
+				
+			</div>
+		</div>
+		<div class="col-md-4">
+			<div class="form-group">
+				<label for "company one">Company Three</label>
+				<input type="text" name="company3" id="company3" class="company"> <br />
+				
+			</div>
+		</div>
+
+	</div>
 	<div class="row">
 		<div class="col-md-4 company-logo" id="company1-img"></div>
 		<div class="col-md-4 company-logo" id="company2-img"></div>
 		<div class="col-md-4 company-logo" id="company3-img"></div>
 	</div>
 	<div class="row">
-		<form class="form-inline" id="companies-form" action="" method="post"> {% csrf_token%}
-		<div class="col-md-4">
-			<div class="form-group">
-				<input type="text" name="company1" id="company1" class="company" min="2" required> <br />
-				<label for "company one">Company #1</label>
-			</div>
-		</div>
-		<div class="col-md-4">
-			<div class="form-group">
-				<input type="text" name="company2" id="company2" class="company" required> <br />
-				<label for "company one">Company #2</label>
-			</div>
-		</div>
-		<div class="col-md-4">
-			<div class="form-group">
-				<input type="text" name="company3" id="company3" class="company"> <br />
-				<label for "company one">Company #3</label>
-			</div>
-		</div>
-
-	</div>
-
-	<div class="row">
-		<div class="col-md-5"></div>
+		<div class="col-md-10"></div>
 		<div class="col-md-2">
 			<button type="submit" class="btn btn-default" id="companies-submit" name="next-results" onclick="location.href='{% url 'results' %}'">see results</button>
 		</div>
-		<div class="col-md-5"></div>
 	</div>
 	</form>
 
