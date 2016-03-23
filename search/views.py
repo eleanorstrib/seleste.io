@@ -4,6 +4,8 @@ from django.views.decorators.csrf import ensure_csrf_cookie
 from search.models import Company, Glassdoor, Indeed 
 import json
 import ast
+import urllib
+import requests
 
 def home(request):
 	return render(request, 'search/index.html', {})
@@ -14,10 +16,19 @@ def companies(request):
 
 
 def results(request):
-	data = request.body
+	data = request.body.decode("utf-8")
 	print(data)
-	print(type(data))
-	print (json.loads(data))
+	print (data.split())
+	# data = json.load(request)  <_ string not bytes
+	# data = json.load(request.body.decode("utf-8")) <-- str has no attribute read
+	# data = json.loads(request.body.decode(encoding="utf-8")) <-- Expecting value: line 1 column 1 (char 0)
+	# data = json.loads(request.body.decode("latin1")) <-- Expecting value: line 1 column 1 (char 0)
+	# data = json.loads(request.decode(encoding="utf-8").read())
+	# print (data)
+	# print (type(data))
+
+	
+
 
 	# for record in gd_data:
 	# 	print(gd_data['name'])
