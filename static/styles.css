@@ -25,14 +25,14 @@ a {
 }
 
 
-.graphic-row {
-	height: 100px;
+.company-logo-gd {
+	height: 150px;
+	vertical-align: center
 }
 
 
 
 input[type='text'] {
-
 	border-width-top: 0px;
 	border-top: none;
 		border-width-right: 0px;
@@ -52,23 +52,25 @@ input[type='text'] {
 }
 
 
-input[type='number'] {
+input[type='number'],.priorities-input {
 	border-width-top: 0px;
 	border-top: none;
-		border-width-right: 0px;
+	border-width-right: 0px;
 	border-right: none;
-		border-width-left: 0px;
+	border-width-left: 0px;
 	border-left: none;
-
+	padding: 0 0 8px 8px;
 	border-bottom-color: #181B59;
 	border-bottom-width: 3px;
 	text-align: center;
 	vertical-align: middle;
 	font-size: 1.4em;
-	width: 100%;
+	width: auto;
 	-webkit-appearance: none; 
     -moz-appearance: textfield; 
     appearance:none;
+    display: inline-block;
+    margin: 0 auto;
     vertical-align: middle;
 }
 
@@ -101,9 +103,9 @@ img.priorities-img {
 }
 
 .priorities-grid, input[type="number"], img, label {
-	margin-left:auto;
+/*	margin-left:auto;
 	margin-right:auto;
-    display: block;
+    display: block;*/
     vertical-align: middle;
    /* top: 50%;
     left: 50%;
@@ -116,15 +118,15 @@ img.priorities-img {
 	text-align:center;
 }
  
-.company-logo{
-	width:50%;
-	margin: 0 auto;
-	text-align: center;
-}
 
 label {
 	color: #181B59;
 	text-align: center;
 }
+
+img.company-logo {
+	padding: 10px;
+}
+
 
 /*#F2D8F2*/
