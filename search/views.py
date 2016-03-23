@@ -3,7 +3,7 @@ from django.http import HttpResponseRedirect, HttpResponse
 from django.views.decorators.csrf import ensure_csrf_cookie
 from search.models import Company, Glassdoor, Indeed 
 import json
-
+import ast
 
 def home(request):
 	return render(request, 'search/index.html', {})
@@ -14,11 +14,10 @@ def companies(request):
 
 
 def results(request):
-	data = request.body.decode('latin-1')
-	print (data)
+	data = request.body
+	print(data)
 	print(type(data))
-	# gd_data = json.loads(data)
-	# print(type(gd_data))
+	print (json.loads(data))
 
 	# for record in gd_data:
 	# 	print(gd_data['name'])

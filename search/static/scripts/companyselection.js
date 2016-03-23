@@ -111,7 +111,16 @@ $(document).ready(function(){
 						
 						if (gdJSONResult.employers.length === 1){
 							callback(gdJSONResult, selectedCompanyIndex);
-							finalCompanyData.push(gdJSONResult.employers[selectedCompanyIndex]);
+							companyData = gdJSONResult.employers[selectedCompanyIndex];
+							for (i in companyData) {
+								if (companyData[i] === true) {
+									companyData[i] = "True"
+								} 
+								if (companyData[i] === false){
+									companyData[i] = "False"
+								}
+							}
+							finalCompanyData.push(companyData);
 							console.log(finalCompanyData);
 							
 						} else {
