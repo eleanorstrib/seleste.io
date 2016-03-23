@@ -14,26 +14,26 @@
 	Let us know how important each of the following is to you by allocating a point value. <br /> When you've allocated 100 points across these 5 factors, click "Next".  
 	</div>
 
-	<form class="form-inline" id="priorities-form" action="" method="get">
+	<form class="form-inline" id="priorities-form" action="" method="get">{% csrf_token %}
 		
 		<div class="row">
 			<div class="col-md-4">			
 				<div class="form-group priorities-grid">
-					<label for="culture and values">Culture & Values</label>
+					<label for="culture and values">Culture & Values</label> &nbsp&nbsp
 					<input type="number" class="form-control" value= "0" id="culturevalues" name="culturevalues" min="0" max="100" required><p></p>
 					<img src="../static/images/culture.svg" alt="culture and values" id="culturevalues" class="priorities-img"/>
 				</div>
 			</div>
 			<div class="col-md-4">
 				<div class="form-group priorities-grid">
-					<label for="management team">Management Team</label>
+					<label for="management team">Management Team</label> &nbsp&nbsp
 					<input type="number" class="form-control" value= "0" id="management" name="management" min="0" max="100" required><p></p> 				
 					<img src="../static/images/management.svg" alt="management" id="management" class="priorities-img"/>
 				</div>
 			</div>
 			<div class="col-md-4">
 				<div class="form-group priorities-grid">
-					<label for="compensation and benefits">Compensation & Benefits</label>
+					<label for="compensation and benefits">Compensation & Benefits</label> &nbsp&nbsp
 					<input type="number" class="form-control"value= "0" id="compensationbenefits" name="compensationbenefits"min="0" max="100" required><p></p>		
 					<img src="../static/images/compensation.svg" alt="compensation" id="compensationbenefits"class="priorities-img" />
 				</div>
@@ -44,14 +44,14 @@
 			<div class="col-md-2"></div>
 			<div class="col-md-4">
 				<div class="form-group priorities-grid">
-					<label for="opportunities">Opportunities</label>
+					<label for="opportunities">Opportunities</label> &nbsp&nbsp
 					<input type="number" class="form-control"  value= "0" id="opportunities" name="opportunities" min="0" max="100" required><p></p>
 					<img src="../static/images/opportunities.svg" alt="opportunities" id="opportunities" class="priorities-img"/>
 				</div>
 			</div>
 			<div class="col-md-4">
 				<div class="form-group priorities-grid">
-					<label for="work/life balance">Work/Life Balance</label>
+					<label for="work/life balance">Work/Life Balance</label> &nbsp&nbsp
 					<input type="number" class="form-control priorities-input" value= "0" id="worklifebalance" name="worklifebalance" min="0" max="100" required><p></p>
 					<img src="../static/images/balance.svg" alt="work/life balance" id="worklifebalance" class="priorities-img"/>
 				</div>

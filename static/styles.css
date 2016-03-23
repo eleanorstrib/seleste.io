@@ -24,13 +24,21 @@ a {
 	font-size: 2em;
 }
 
-
-.company-logo-gd {
-	height: 150px;
-	vertical-align: center
+label, input {
+	display: table-cell; 
+	vertical-align: middle;
 }
 
+img.company-logo {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+}
 
+label, input {
+	display: table-cell;
+    vertical-align: middle
+}
 
 input[type='text'] {
 	border-width-top: 0px;
@@ -59,7 +67,7 @@ input[type='number'],.priorities-input {
 	border-right: none;
 	border-width-left: 0px;
 	border-left: none;
-	padding: 0 0 8px 8px;
+	text-align:center;
 	border-bottom-color: #181B59;
 	border-bottom-width: 3px;
 	text-align: center;
@@ -85,9 +93,11 @@ img.priorities-img {
 	max-width: 100%;
     height: auto;
 	width: 50px;
-	margin-left: auto;
-    margin-right: auto;
-
+	position: relative;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
 }
 
 .title-text {
@@ -121,12 +131,11 @@ img.priorities-img {
 
 label {
 	color: #181B59;
-	text-align: center;
 }
-
+/*
 img.company-logo {
 	padding: 10px;
 }
-
+*/
 
 /*#F2D8F2*/

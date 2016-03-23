@@ -1,7 +1,7 @@
 //jquery client code
-	
-
+console.log(localStorage);
 $(document).ready(function(){
+	
 	//CSRF settings for every Ajax call
 	function csrfSafeMethod(method) {
     // these HTTP methods do not require CSRF protection
@@ -37,7 +37,7 @@ $(document).ready(function(){
 			if (data === null) {
 				$('#gd-error-modal').modal('show');
 			} else {
-				console.log("no errors!");
+				console.log(priorities);
 				writeData(data, searchBoxID, selectedCompanyIndex);
 			}
 		});	
@@ -58,7 +58,7 @@ $(document).ready(function(){
 
 	$("#companies-submit").on('click',function(e){
 		e.preventDefault();
-		postToServer(finalCompanyData, function(data){
+		postCompaniesToServer(finalCompanyData, function(data){
 			if (data === undefined) {
 				alert("there was an error!");
 			}
@@ -168,7 +168,7 @@ $(document).ready(function(){
 	}
 
 
-	function postToServer(finalCompanyData, callback){
+	function postCompaniesToServer(finalCompanyData, callback){
 		finalCompanyDataStr = JSON.stringify(finalCompanyData);
 		$.ajax({
 			type: "POST",

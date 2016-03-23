@@ -1,12 +1,13 @@
+var priorities = {};
 $(document).ready(function(){
-	var priorities = {};
+	
 
 	$('button[type=submit]').attr('disabled', 'disabled');
 
 	// change the size of the image based on the value selected in the box
 	$('input#culturevalues').change(function(){
 		$('img#culturevalues').animate({
-    	left: "+=80",
+    	center: "+=80",
     	width: parseInt(($('input#culturevalues').val()))*2 + 35,
   		}, 2000, function() {
   			checkTotal()
@@ -15,7 +16,7 @@ $(document).ready(function(){
 
 	$('input#opportunities').change(function(){
 		$('img#opportunities').animate({
-    	left: "+=80",
+    	center: "+=80",
     	width: parseInt(($('input#opportunities').val()))*2 + 35,
   		}, 2000, function() {
   			checkTotal()
@@ -24,7 +25,7 @@ $(document).ready(function(){
 
 	$('input#management').change(function(){
 		$('img#management').animate({
-    	left: "+=80",
+    	center: "+=80",
     	width: parseInt(($('input#management').val()))*2 + 35,
   		}, 2000, function() {
   			checkTotal()
@@ -33,7 +34,7 @@ $(document).ready(function(){
 
 	$('input#compensationbenefits').change(function(){
 		$('img#compensationbenefits').animate({
-    	left: "+=80",
+    	center: "+=80",
     	width: parseInt(($('input#compensationbenefits').val()))*2 + 35,
   		}, 2000, function() {
   			checkTotal()
@@ -42,7 +43,7 @@ $(document).ready(function(){
 
 	$('input#worklifebalance').change(function(){
 		$('img#worklifebalance').animate({
-    	left: "+=80",
+    	center: "+=80",
     	width: parseInt(($('input#worklifebalance').val()))*2 + 35,
   		}, 2000, function() {
   			checkTotal()
@@ -69,7 +70,7 @@ $(document).ready(function(){
 			return false;
 		} else if (currentTotal === 100) {
 			$('div.total-msg').html("Nice work!  You've allocated all 100 points. <br /> Click 'next' on the bottom of the screen to select companies to compare based on your priorites.");
-			saveToSession();
+			addPrioritiesToObject();
 			return true;
 		} else {
 			$('input[type=submit]').prop('disabled', true);
@@ -78,20 +79,24 @@ $(document).ready(function(){
 		}
 	};
 
-	function saveToSession() {
-		if (checkTotal()) {
-			priorities.culturevalues = parseInt(($('input#culturevalues').val()));
-			priorities.opportunities = parseInt(($('input#opportunities').val()));
-			priorities.management = parseInt(($('input#management').val()));
-			priorities.compensationbenefits = parseInt(($('input#compensationbenefits').val()));
-			priorities.worklifebalance = parseInt(($('input#worklifebalance').val()));
-			localStorage.setItem("priorities", JSON.stringify(priorities));
-			console.log(localStorage);
-		} else {
-			// this is a failsafe, button should be disabled in checkTotal anyway
-			$('div.total-msg').html("Your allocations need to add up to 100 before you can continue.")
-		};
+
+	function addPrioritiesToObject() {
+		priorities.culturevalues = parseInt($('input#culturevalues').val());
+		priorities.opportunities = parseInt($('input#opportunities').val());
+		priorities.management = parseInt($('input#management').val());
+		priorities.compensationbenefits = parseInt($('input#compensationbenefits').val());
+		priorities.worklifebalance = parseInt($('input#worklifebalance').val());
+		addPrioritiesToLocalStorage();
+	};	
+
+	function addPrioritiesToLocalStorage(){
+
+		var prioritiesStr = JSON.stringify(priorities);
+		console.log(prioritiesStr);
+		localStorage.setItem("priorities", prioritiesStr);
+		console.log(localStorage);
 	};
+	
 
 	$("#priorities-form").on('submit', function(e) {
 		e.preventDefault();

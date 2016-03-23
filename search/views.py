@@ -9,6 +9,9 @@ def home(request):
 
 @ensure_csrf_cookie
 def companies(request):
+	data = request.body.decode('latin-1')
+	print (data)
+	print(type(data))
 	return render_to_response('search/companies.html', {})
 
 
