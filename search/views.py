@@ -4,14 +4,12 @@ from django.views.decorators.csrf import ensure_csrf_cookie
 from search.models import Company, Glassdoor, Indeed 
 import json
 
+
 def home(request):
 	return render(request, 'search/index.html', {})
 
 @ensure_csrf_cookie
 def companies(request):
-	data = request.body.decode('latin-1')
-	print (data)
-	print(type(data))
 	return render_to_response('search/companies.html', {})
 
 

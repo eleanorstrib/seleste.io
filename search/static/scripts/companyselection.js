@@ -15,7 +15,10 @@ $(document).ready(function(){
 	    }
 	});
 	//
-	var finalCompanyData = [];
+	var priorities = JSON.parse(localStorage.getItem('priorities'));
+	var finalCompanyData = [priorities];
+	console.log(finalCompanyData);
+	console.log(typeof(priorities));
 	var csrftoken = Cookies.get('csrftoken');
 	console.log(csrftoken);
 
@@ -37,7 +40,6 @@ $(document).ready(function(){
 			if (data === null) {
 				$('#gd-error-modal').modal('show');
 			} else {
-				console.log(priorities);
 				writeData(data, searchBoxID, selectedCompanyIndex);
 			}
 		});	
@@ -51,6 +53,9 @@ $(document).ready(function(){
 			} else {
 				console.log("no errors!");
 				writeData(data, searchBoxID, selectedCompanyIndex);
+				console.log(finalCompanyData);
+				console.log(JSON.stringify(finalCompanyData));
+				console.log(typeof(JSON.stringify(finalCompanyData)));
 			}
 		});		
 
@@ -58,7 +63,7 @@ $(document).ready(function(){
 
 	$("#companies-submit").on('click',function(e){
 		e.preventDefault();
-		postCompaniesToServer(finalCompanyData, function(data){
+		postDataToServer(finalCompanyData, function(data){
 			if (data === undefined) {
 				alert("there was an error!");
 			}
@@ -168,16 +173,20 @@ $(document).ready(function(){
 	}
 
 
-	function postCompaniesToServer(finalCompanyData, callback){
-		finalCompanyDataStr = JSON.stringify(finalCompanyData);
+	function postDataToServer(finalCompanyData, callback){
+		var allDataStr = JSON.stringify(finalCompanyData);
+		console.log(allDataStr);
+		alert("allDataStr");
 		$.ajax({
 			type: "POST",
 			contentType: "application/JSON",
 			url: "/results/",
-			data: finalCompanyDataStr,
+			data: allDataStr,
 			dataType: JSON,
 		});
 	}
+
+
 });
 
 	
