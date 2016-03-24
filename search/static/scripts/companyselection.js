@@ -83,9 +83,14 @@ $(document).ready(function(){
 		$('#' + searchBoxID).val(gdAPIData.employers[selectedCompanyIndex].name);
 		$('#' + searchBoxID).prop('disabled', true);
 		var logoURL = gdAPIData.employers[selectedCompanyIndex].squareLogo
-		$('#' + searchBoxID + '-img').prepend('<img src="' + logoURL + '" width="125" class="company-logo"/>');
+		var sector = gdAPIData.employers[selectedCompanyIndex].sectorName
+		var industry = gdAPIData.employers[selectedCompanyIndex].industryName
+		var website = gdAPIData.employers[selectedCompanyIndex].website
+		$('#' + searchBoxID + '-img').prepend('<img src="' + logoURL + '" width="100" class="company-logo"/>');
+		$('#' + searchBoxID + '-info').prepend('<h6>' + sector + '  |  ' + industry +'</h3>');
+		$('#' + searchBoxID + '-info').prepend('<h6><a href="http://' + website + '" target="_blank">' + website + '</a></h6>');
 	}; 
-		
+
 
 	// calls Glassdoor API and returns JSON results
     function glassdoorAPIData(company, callback) {

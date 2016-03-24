@@ -35,23 +35,23 @@ img.company-logo {
 	margin-right: auto;
 }
 
+.company-info {
+	text-align: center;
+}
+
 label, input {
 	display: table-cell;
     vertical-align: middle
 }
 
 input[type='text'] {
-	border-width-top: 0px;
 	border-top: none;
-		border-width-right: 0px;
 	border-right: none;
-		border-width-left: 0px;
 	border-left: none;
-
 	border-bottom-color: #181B59;
 	border-bottom-width: 3px;
 	text-align: center;
-	font-size: 1.4em;
+	font-size: 1em;
 	width: 100%;
 	-webkit-appearance: none; 
     -moz-appearance: textfield; 
@@ -132,10 +132,10 @@ img.priorities-img {
 label {
 	color: #181B59;
 }
-/*
-img.company-logo {
-	padding: 10px;
+
+div.company-info {
+	width: 50%; 
+	margin: 0 auto;
 }
-*/
 
 /*#F2D8F2*/
