@@ -1,7 +1,7 @@
 //jquery client code
 console.log(localStorage);
 $(document).ready(function(){
-	
+	$('#companies-submit').prop('disabled', true);
 	//CSRF settings for every Ajax call
 	function csrfSafeMethod(method) {
     // these HTTP methods do not require CSRF protection
@@ -29,6 +29,7 @@ $(document).ready(function(){
 				$('#gd-error-modal').modal('show');
 			} else {
 				writeData(data, searchBoxID, selectedCompanyIndex);
+				checkInputsActivateButton();
 			}
 		});	
 
@@ -41,6 +42,7 @@ $(document).ready(function(){
 				$('#gd-error-modal').modal('show');
 			} else {
 				writeData(data, searchBoxID, selectedCompanyIndex);
+				checkInputsActivateButton();
 			}
 		});	
 	});
@@ -53,6 +55,7 @@ $(document).ready(function(){
 			} else {
 				console.log("no errors!");
 				writeData(data, searchBoxID, selectedCompanyIndex);
+				checkInputsActivateButton();
 				console.log(finalCompanyData);
 				console.log(JSON.stringify(finalCompanyData));
 				console.log(typeof(JSON.stringify(finalCompanyData)));
@@ -200,6 +203,11 @@ $(document).ready(function(){
 		});
 	}
 
+	function checkInputsActivateButton(){
+		if ($('#company1').val() != '' && $('#company1').val()!= '' && $('#company3').val() != ''){
+			$('#companies-submit').prop('disabled', false);
+		}
+	};
 
 });
 
