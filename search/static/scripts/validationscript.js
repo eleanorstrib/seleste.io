@@ -2,7 +2,7 @@ var priorities = {};
 $(document).ready(function(){
 	
 
-	$('button[type=submit]').attr('disabled', 'disabled');
+	$('#priorities-submit').prop('disabled', true);
 
 	// change the size of the image based on the value selected in the box
 	$('input#culturevalues').change(function(){
@@ -65,16 +65,17 @@ $(document).ready(function(){
 	function checkTotal(){
 		var currentTotal = sumTotal()
 		if (currentTotal < 100) {
-			$('div.total-msg').html("You've allocated " + currentTotal + " points. " + (100-currentTotal) + " left!");
-			$('input[type=submit]').prop('disabled', true);
+			$('div.total-msg').html("You've allocated " + currentTotal + " points. " + (100-currentTotal) + " left!").removeClass("alert alert-success").addClass("alert alert-warning");
+			$('#priorities-submit').prop('disabled', true);
 			return false;
 		} else if (currentTotal === 100) {
-			$('div.total-msg').html("Nice work!  You've allocated all 100 points. <br /> Click 'next' on the bottom of the screen to select companies to compare based on your priorites.");
+			$('div.total-msg').html("Nice work!  You've allocated all 100 points. <br /> Click 'next' on the bottom of the screen to select companies to compare based on your priorites.").removeClass("alert alert-warning").addClass("alert alert-success");
 			addPrioritiesToObject();
+			$('#priorities-submit').prop('disabled', false);
 			return true;
 		} else {
-			$('input[type=submit]').prop('disabled', true);
-			$('div.total-msg').html("Oops, you've over allocated by " + (currentTotal-100) + " points.  Try rebalancing.");
+			$('div.total-msg').html("Oops, you've over allocated by " + (currentTotal-100) + " points.  Try rebalancing.").removeClass("alert alert-success").addClass("alert alert-warning");
+			$('#priorities-submit').prop('disabled', true);
 			return false;
 		}
 	};

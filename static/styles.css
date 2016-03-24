@@ -5,6 +5,11 @@ body {
 	font-family: 'Lato', sans-serif;
 }
 
+div {
+	text-align: center;
+	align: center;
+}
+
 .navbar {
 	background-color: #F2D8F2; 
 	border-radius: 0px;
@@ -24,11 +29,6 @@ a {
 	font-size: 2em;
 }
 
-label, input {
-	display: table-cell; 
-	vertical-align: middle;
-}
-
 img.company-logo {
 	display: block;
 	margin-left: auto;
@@ -39,10 +39,6 @@ img.company-logo {
 	text-align: center;
 }
 
-label, input {
-	display: table-cell;
-    vertical-align: middle
-}
 
 input[type='text'] {
 	border-top: none;
@@ -51,12 +47,13 @@ input[type='text'] {
 	border-bottom-color: #181B59;
 	border-bottom-width: 3px;
 	text-align: center;
-	font-size: 1em;
+	font-size: 1.2em;
 	width: 100%;
 	-webkit-appearance: none; 
     -moz-appearance: textfield; 
     appearance:none;
-    vertical-align: middle;
+    display: block;
+    margin : 0 auto;
 }
 
 
@@ -72,7 +69,7 @@ input[type='number'],.priorities-input {
 	border-bottom-width: 3px;
 	text-align: center;
 	vertical-align: middle;
-	font-size: 1.4em;
+	font-size: 1.2em;
 	width: auto;
 	-webkit-appearance: none; 
     -moz-appearance: textfield; 
@@ -131,11 +128,11 @@ img.priorities-img {
 
 label {
 	color: #181B59;
+	display: block;
+    margin : 0 auto;
 }
 
-div.company-info {
-	width: 50%; 
-	margin: 0 auto;
+div.modal-dialog {
+	align: left !important;
 }
-
 /*#F2D8F2*/
