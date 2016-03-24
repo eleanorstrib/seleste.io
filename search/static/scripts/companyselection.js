@@ -86,9 +86,9 @@ $(document).ready(function(){
 		var sector = gdAPIData.employers[selectedCompanyIndex].sectorName
 		var industry = gdAPIData.employers[selectedCompanyIndex].industryName
 		var website = gdAPIData.employers[selectedCompanyIndex].website
-		$('#' + searchBoxID + '-img').prepend('<img src="' + logoURL + '" width="100" class="company-logo"/>');
-		$('#' + searchBoxID + '-info').prepend('<h6>' + sector + '  |  ' + industry +'</h3>');
-		$('#' + searchBoxID + '-info').prepend('<h6><a href="http://' + website + '" target="_blank">' + website + '</a></h6>');
+		$('#' + searchBoxID + '-img').prepend('<img src="' + logoURL + '" width="100" class="company-logo"/> <br />');
+		$('#' + searchBoxID + '-img').prepend('<h6>' + sector + '  |  ' + industry +'</h3><br/>');
+		$('#' + searchBoxID + '-img').prepend('<h6><a href="http://' + website + '" target="_blank">' + website + '</a></h6><br />');
 	}; 
 
 
