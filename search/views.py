@@ -4,6 +4,7 @@ from django.views.decorators.csrf import ensure_csrf_cookie
 from search.models import Company, Glassdoor, Indeed 
 import json
 import requests
+from search.indeed import get_soup, get_ratings, BASE_URL, RATING_DENOMINATOR, AVAILABLE_STARS
 
 def home(request):
 	return render(request, 'search/index.html', {})
@@ -19,6 +20,12 @@ def results(request):
 		json_data = json.loads(data)
 		priorities = json_data.pop(0)
 		print('priorities', priorities, type(priorities))
+
+		for company in json_data:
+			search_company = company['name']
+			soup = get_soup(BASE_URL, search_company)
+			indeed_data = get_ratings(soup, search_company)
+			print('search_company:', indeed_data)
 		# company1_name = json_data[0].name
 		# company2_name = json_data[1].name
 		# company3_name = json_data[2].name
