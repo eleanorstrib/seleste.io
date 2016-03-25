@@ -21,23 +21,24 @@ def results(request):
 		priorities = json_data.pop(0)
 		print('priorities', priorities, type(priorities))
 
+		all_company_data = {}
+
 		for company in json_data:
-			search_company = company['name']
-			soup = get_soup(BASE_URL, search_company)
-			indeed_data = get_ratings(soup, search_company)
-			print('search_company:', indeed_data)
-		# company1_name = json_data[0].name
-		# company2_name = json_data[1].name
-		# company3_name = json_data[2].name
-		# print(company1_name, company2_name, company3_name)
-		# print(data)
-	# data = json.load(request)  <_ string not bytes
-	# data = json.load(request.body.decode("utf-8")) <-- str has no attribute read
-	# data = json.loads(request.body.decode(encoding="utf-8")) <-- Expecting value: line 1 column 1 (char 0)
-	# data = json.loads(request.body.decode("latin1")) <-- Expecting value: line 1 column 1 (char 0)
-	# data = json.loads(request.decode(encoding="utf-8").read())
-	# print (data)
-	# print (type(data))
+			# add a company_name key to the dict, add Glassdoor data
+			company_name = company['name']
+			all_company_data[company_name] = []
+			all_company_data[company_name] = all_company_data.get(company_name, []) + [{'glassdoor': company}]
+			# initiate the web scraper to get data from Indeed
+			soup = get_soup(BASE_URL, company_name)
+			indeed_data = get_ratings(soup, company_name)
+			if "no ratings available" not in indeed_data:
+				all_company_data[company_name] = all_company_data.get(company_name, []) + [{'indeed': indeed_data}]
+			else:
+				print("no indeed data for", company_name)
+
+		print(all_company_data)
+			
+
 
 	
 
