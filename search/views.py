@@ -3,8 +3,6 @@ from django.http import HttpResponseRedirect, HttpResponse
 from django.views.decorators.csrf import ensure_csrf_cookie
 from search.models import Company, Glassdoor, Indeed 
 import json
-import ast
-import urllib
 import requests
 
 def home(request):
@@ -16,9 +14,16 @@ def companies(request):
 
 
 def results(request):
-	data = request.body.decode("utf-8")
-	print(data)
-	print (data.split())
+	if request.method == 'POST':
+		data = request.body.decode("utf-8")
+		json_data = json.loads(data)
+		priorities = json_data.pop(0)
+		print('priorities', priorities, type(priorities))
+		# company1_name = json_data[0].name
+		# company2_name = json_data[1].name
+		# company3_name = json_data[2].name
+		# print(company1_name, company2_name, company3_name)
+		# print(data)
 	# data = json.load(request)  <_ string not bytes
 	# data = json.load(request.body.decode("utf-8")) <-- str has no attribute read
 	# data = json.loads(request.body.decode(encoding="utf-8")) <-- Expecting value: line 1 column 1 (char 0)

@@ -194,8 +194,7 @@ $(document).ready(function(){
 		var allDataStr = JSON.stringify(finalCompanyData);
 		console.log(allDataStr);
 		alert("allDataStr");
-		$.ajax({
-			type: "POST",
+		$.post({
 			contentType: "application/JSON",
 			url: "/results/",
 			data: allDataStr,
