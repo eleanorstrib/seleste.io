@@ -16,14 +16,15 @@ def get_soup(BASE_URL, company):
 
 	return soup
 
+
 def get_ratings(soup, company):
 	"""
 	Pull data out of the "soup" and clean to derive data for a 5 point scale
 	"""
 	company_ratings = {}
 
-	if len(soup.select('dl#cmp-reviews-attributes dt')) != 0:
-		company_ratings['Indeed'] = {}
+	if len(soup.select('dl#cmp-reviews-attributes dt')) != 0 and len(soup.select('dl#cmp-reviews-attributes dt'))!= None:
+		company_ratings = {}
 		rating_categories = [dl.get_text() for dl in soup.select('dl#cmp-reviews-attributes dt')]
 
 		# need to grab pixel values from dom, splice, and turn into integers
@@ -31,12 +32,20 @@ def get_ratings(soup, company):
 		rating_stars_clean = [float(item[7:-2]) for item in rating_stars_raw]
 
 		for item in rating_categories:
-			company_ratings['Indeed'][item] = round(((rating_stars_clean[rating_categories.index(item)]/RATING_DENOMINATOR) * AVAILABLE_STARS), 1)
+			company_ratings[item] = round(((int(rating_stars_clean[rating_categories.index(item)])/RATING_DENOMINATOR) * AVAILABLE_STARS), 1)
+			print('number for stars', rating_stars_clean[rating_categories.index(item)])
+			print(type(rating_stars_clean[rating_categories.index(item)]))
+		raw_num_reviews = (soup.find(attrs={'data-tn-component': 'overall-rating'}).get_text())[0:-8]
+			# Indeed shortens numbers of reviews > 1000; for example 2100 reviews would be 2.1K reviews
+			# This code searches for the 'K', removes it if present, then converts the number
+		if 'K' in raw_num_reviews or 'k' in raw_num_reviews:
+			raw_num_reviews = raw_num_reviews[:-1]
+			raw_num_reviews = float(raw_num_reviews)*1000
+	
+		company_ratings['TotalReviews'] = raw_num_reviews
 
-		company_ratings['Indeed']['TotalReviews'] = int((soup.find(attrs={'data-tn-component': 'overall-rating'}).get_text())[0:-8])
-		
-		company_ratings['Indeed']['Overall'] = [float(element.get_text()) for element in soup.select('div span.cmp-average-rating')][0]
-		company_ratings['Indeed']['Name'] = company
+		company_ratings['Overall'] = [float(element.get_text()) for element in soup.select('div span.cmp-average-rating')][0]
+		company_ratings['Name'] = company
 		
 		return company_ratings
 
