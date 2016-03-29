@@ -36,7 +36,6 @@ def results(request):
 			else:
 				print("no indeed data for", company_name)
 
-		print(all_company_data)
 		merge_data(all_company_data)
 
 

@@ -33,8 +33,7 @@ def get_ratings(soup, company):
 
 		for item in rating_categories:
 			company_ratings[item] = round(((int(rating_stars_clean[rating_categories.index(item)])/RATING_DENOMINATOR) * AVAILABLE_STARS), 1)
-			print('number for stars', rating_stars_clean[rating_categories.index(item)])
-			print(type(rating_stars_clean[rating_categories.index(item)]))
+		
 		raw_num_reviews = (soup.find(attrs={'data-tn-component': 'overall-rating'}).get_text())[0:-8]
 			# Indeed shortens numbers of reviews > 1000; for example 2100 reviews would be 2.1K reviews
 			# This code searches for the 'K', removes it if present, then converts the number
