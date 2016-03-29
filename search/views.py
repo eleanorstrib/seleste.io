@@ -36,23 +36,10 @@ def results(request):
 			else:
 				print("no indeed data for", company_name)
 
-		merge_data(all_company_data)
+			merge_data(all_company_data)
 
+	return render(request, 'search/results.html', {})
 
 	
 
 
-	# for record in gd_data:
-	# 	print(gd_data['name'])
-	# 	models.Company.company_name = gd_data['name']
-	# 	models.Glassdoor.company_name = gd_data['name']
-	# 	models.Glassdoor.overall_rating = gd_data['overallRating']
-	# 	models.Glassdoor.number_ratings = gd_data['numberOfRatings']
-	# 	models.Glassdoor.culture_values_rating = gd_data['cultureAndValuesRating']
-	# 	models.Glassdoor.management_rating = gd_data['seniorLeadershipRating']
-	# 	models.Glassdoor.compensation_benefits_rating = gd_data['compensationAndBenefitsRating']
-	# 	models.Glassdoor.opportunities_rating = gd_data['careerOpportunitiesRating']
-	# 	models.Glassdoor.work_life_balance_rating = gd_data['workLifeBalanceRating']
-	# 	models.Glassdoor.recommend_to_friend_rating = gd_data['recommendToFriendRating']
-
-	return render(request, 'search/results.html', {})

@@ -1,4 +1,4 @@
-
+import json
 
 def merge_data(all_company_data):
 	"""
@@ -19,20 +19,18 @@ def merge_data(all_company_data):
 
 			pct_ratings_gd = float(num_gd_ratings/num_reviews)
 			pct_ratings_in = float(num_in_ratings/num_reviews)
-			print(pct_ratings_in, pct_ratings_gd)
-			print (type(pct_ratings_in))
+
 			
 			# calculate weighted averages and add to new dict
 			summarized_data = {}
-			print('(float(gd_index[overallRating])*pct_ratings_gd)', (float(gd_index['overallRating'])*pct_ratings_gd))
-			print('(float(in_index[Overall])*pct_ratings_in)', (float(in_index['Overall'])*pct_ratings_in))
-			print((float(gd_index['overallRating'])*pct_ratings_gd) + (float(in_index['Overall'])*pct_ratings_in))
+			
 			summarized_data['overall'] = (float(gd_index['overallRating'])*pct_ratings_gd) + (float(in_index['Overall'])*pct_ratings_in)
 			summarized_data['work_life'] = (float(gd_index['workLifeBalanceRating'])*pct_ratings_gd) + (float(in_index['Work/Life Balance'])*pct_ratings_in)
 			summarized_data['opportunities'] = (float(gd_index['careerOpportunitiesRating'])*pct_ratings_gd) + (float(in_index['Job Security/Advancement'])*pct_ratings_in)
 			summarized_data['compensation_benefits'] = (float(gd_index['compensationAndBenefitsRating'])*pct_ratings_gd) + (float(in_index['Compensation/Benefits'])*pct_ratings_in)
 			summarized_data['management'] = (float(gd_index['seniorLeadershipRating'])*pct_ratings_gd) + (float(in_index['Management'])*pct_ratings_in)
 			summarized_data['culture_values'] = (float(gd_index['cultureAndValuesRating'])*pct_ratings_gd) + (float(in_index['Culture'])*pct_ratings_in)
+			
 			(all_company_data[company]).append(summarized_data)
 			print(all_company_data)
 
