@@ -1,4 +1,5 @@
-*.DS_store
+sub*.DS_store
 *secret.sh
 *secret.js
 *venv
+testcode.py*

@@ -16,10 +16,12 @@ def companies(request):
 
 
 def results(request):
+	print ("in results func")
 	if request.method == 'POST':
 		data = request.body.decode("utf-8")
 		json_data = json.loads(data)
 		priorities = json_data.pop(0)
+		print(priorities)
 
 		# this dict will hold all of the Glassdoor and Indeed data
 		all_company_data = {}
@@ -36,7 +38,8 @@ def results(request):
 			else:
 				print("no indeed data for", company_name)
 
-			merge_data(all_company_data)
+			merge_data(all_company_data, priorities)
+			
 
 	return render(request, 'search/results.html', {})
 
