@@ -16,15 +16,16 @@ def companies(request):
 
 
 def results(request):
-	print ("in results func")
 	if request.method == 'POST':
 		data = request.body.decode("utf-8")
 		json_data = json.loads(data)
 		priorities = json_data.pop(0)
-		print(priorities)
 
 		# this dict will hold all of the Glassdoor and Indeed data
 		all_company_data = {}
+
+		#this dict will hold the summary data for ranking
+		ranked_cos = {}
 
 		for company in json_data:
 			company_name = company['name']
@@ -39,9 +40,13 @@ def results(request):
 				print("no indeed data for", company_name)
 
 			merge_data(all_company_data, priorities)
-			
 
-	return render(request, 'search/results.html', {})
+		for co in all_company_data:
+			ranked_cos[co] = all_company_data[co][-1]['ranked']['total_score']
+
+		print ("this is the ranked company list: ", ranked_cos)
+
+	return render(request, 'search/results.html', {'ranked_cos': ranked_cos})
 
 	
 

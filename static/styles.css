@@ -14,15 +14,18 @@ div {
 	background-color: #F2D8F2; 
 	border-radius: 0px;
 	opacity: 0.75;
+	border-bottom: 4px;
+	border-style: solid;
+	border-color: #181B59;
 }
 
 a.navbar-brand {
 	color: #181B59;
 }
 
-a {
+/*a {
 	font-family: 'Quicksand', sans-serif;
-}
+}*/
 
 .navbar-brand {
 	font-family: 'Quicksand', sans-serif;

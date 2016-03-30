@@ -67,6 +67,6 @@ function statusChangeCallback(response) {
       console.log('Successful login for: ' + response.name);
       console.log(response);
       document.getElementById('status').innerHTML =
-        'Thanks for logging in, ' + response.name + '!';
+        'Hi, ' + response.name + '!';
     });
   }

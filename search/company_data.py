@@ -45,9 +45,9 @@ def merge_data(all_company_data, priorities):
 				scores['ranked']['total_score'] = scores['ranked']['culture_values'] + scores['ranked']['opportunities'] + scores['ranked']['work_life'] + scores['ranked']['compensation_benefits'] + scores['ranked']['management']
 
 			(all_company_data[company]).append(scores)
-
-
-		elif len(all_company_data[company]) == 1:
+			
+		# this isn't working -- need to handle case where there is no indeed review
+		if len(all_company_data[company]) == 1:
 			summarized_data['all_reviews']['overall'] = gd_index['overallRating']
 			summarized_data['all_reviews']['work_life'] = gd_index['workLifeBalanceRating']
 			summarized_data['all_reviews']['opportunities'] = gd_index['careerOpportunitiesRating']
@@ -60,27 +60,13 @@ def merge_data(all_company_data, priorities):
 		else: 
 			print("something went wrong with ", gd_index['name'])
 			return all_company_data
-
+			
 	print(all_company_data)
-	
+	return all_company_data
 
 
-
-
-def compute_scores(company_data, priorities, all_company_data):
-	scores = {}
-	scores['ranked'] = {}
-
-	for item in company_data['all_reviews']:
-		scores['ranked']['culture_values'] = ((float(priorities['culturevalues'])/100) * company_data['all_reviews']['culture_values'])
-		scores['ranked']['opportunities'] = ((float(priorities['opportunities'])/100) * company_data['all_reviews']['opportunities'])
-		scores['ranked']['work_life'] = ((float(priorities['worklifebalance'])/100) * company_data['all_reviews']['work_life'])
-		scores['ranked']['compensation_benefits'] = ((float(priorities['compensationbenefits'])/100) * company_data['all_reviews']['compensation_benefits'])
-		scores['ranked']['management'] = ((float(priorities['management'])/100) * company_data['all_reviews']['management'])
-		scores['ranked']['total_score'] = scores['ranked']['culture_values'] + scores['ranked']['opportunities'] + scores['ranked']['work_life'] + scores['ranked']['compensation_benefits'] + scores['ranked']['management']
 
 	
-
 
 
 
