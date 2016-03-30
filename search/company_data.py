@@ -30,9 +30,22 @@ def merge_data(all_company_data, priorities):
 			summarized_data['all_reviews']['compensation_benefits'] = (float(gd_index['compensationAndBenefitsRating'])*pct_ratings_gd) + (float(in_index['Compensation/Benefits'])*pct_ratings_in)
 			summarized_data['all_reviews']['management'] = (float(gd_index['seniorLeadershipRating'])*pct_ratings_gd) + (float(in_index['Management'])*pct_ratings_in)
 			summarized_data['all_reviews']['culture_values'] = (float(gd_index['cultureAndValuesRating'])*pct_ratings_gd) + (float(in_index['Culture'])*pct_ratings_in)
-			print("summarized_data", summarized_data)
+			
 			(all_company_data[company]).append(summarized_data)
-			compute_scores(summarized_data, priorities, all_company_data)
+			
+			scores = {}
+			scores['ranked'] = {}
+
+			for item in summarized_data['all_reviews']:
+				scores['ranked']['culture_values'] = ((float(priorities['culturevalues'])/100) * summarized_data['all_reviews']['culture_values'])
+				scores['ranked']['opportunities'] = ((float(priorities['opportunities'])/100) * summarized_data['all_reviews']['opportunities'])
+				scores['ranked']['work_life'] = ((float(priorities['worklifebalance'])/100) * summarized_data['all_reviews']['work_life'])
+				scores['ranked']['compensation_benefits'] = ((float(priorities['compensationbenefits'])/100) * summarized_data['all_reviews']['compensation_benefits'])
+				scores['ranked']['management'] = ((float(priorities['management'])/100) * summarized_data['all_reviews']['management'])
+				scores['ranked']['total_score'] = scores['ranked']['culture_values'] + scores['ranked']['opportunities'] + scores['ranked']['work_life'] + scores['ranked']['compensation_benefits'] + scores['ranked']['management']
+
+			(all_company_data[company]).append(scores)
+
 
 		elif len(all_company_data[company]) == 1:
 			summarized_data['all_reviews']['overall'] = gd_index['overallRating']
@@ -57,7 +70,7 @@ def merge_data(all_company_data, priorities):
 def compute_scores(company_data, priorities, all_company_data):
 	scores = {}
 	scores['ranked'] = {}
-	print(company_data['all_reviews'])
+
 	for item in company_data['all_reviews']:
 		scores['ranked']['culture_values'] = ((float(priorities['culturevalues'])/100) * company_data['all_reviews']['culture_values'])
 		scores['ranked']['opportunities'] = ((float(priorities['opportunities'])/100) * company_data['all_reviews']['opportunities'])
