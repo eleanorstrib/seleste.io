@@ -52,7 +52,7 @@ def results(request):
 		for co in all_company_data:
 			ranked_cos[co] = all_company_data[co][2]
 		print ("this is the ranked company list: ", ranked_cos)
-		return render(request, 'search/results.html', {})
+		return render(request, 'search/results.html', {'ranked_cos': ranked_cos})
 
 	
 
