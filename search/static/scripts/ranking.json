@@ -1,0 +1,15 @@
+{ "ranking": [
+				{	"company": "Google",
+					"score": 4.029889595182335,
+					"rank": 2
+				},
+				{ "company": "Glassdoor", 
+					"score": 4.396139705882353, 
+					"rank": 1
+				},
+				{ "company": "TubeMogul",
+					"score": 3.5196899224806204,
+					"rank": 3
+				},
+			]
+}

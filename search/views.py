@@ -46,7 +46,7 @@ def results(request):
 
 		print ("this is the ranked company list: ", ranked_cos)
 
-	return render(request, 'search/results.html', {'ranked_cos': ranked_cos})
+	return render(request, 'search/results.html', {})
 
 	
 
