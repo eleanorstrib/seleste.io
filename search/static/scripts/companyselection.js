@@ -64,8 +64,8 @@ $(document).ready(function(){
 
 	});
 
-	$("#companies-submit").on('click',function(e){
-		e.preventDefault();
+	$("#companies-submit").on('submit',function(e){
+		// e.preventDefault();
 		postDataToServer(finalCompanyData, function(data){
 			if (data === undefined) {
 				alert("there was an error!");
