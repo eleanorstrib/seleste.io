@@ -56,33 +56,37 @@ $(document).ready(function(){
 				console.log("no errors!");
 				writeData(data, searchBoxID, selectedCompanyIndex);
 				checkInputsActivateButton();
-				console.log(finalCompanyData);
-				console.log(JSON.stringify(finalCompanyData));
+				var allDataStr= JSON.stringify(finalCompanyData)
+				console.log(allDataStr);/// THIS IS BEING EXECUTED
 				console.log(typeof(JSON.stringify(finalCompanyData)));
 			}
 		});		
 
 	});
 
-	$("#companies-submit").on('submit',function(e){
-		// e.preventDefault();
-		postDataToServer(finalCompanyData, function(data){
-			if (data === undefined) {
-				alert("there was an error!");
-			}
-		});
-		
-	});
+	// executes when button is clicked, calls function that posts data to server
+	function clickSubmit(){ 
+		$("#companies-submit").on('submit',function(e){
+			e.preventDefault();
+			alert('clicked submit');
+			postDataToServer(finalCompanyData, function(data){
+				if (data === undefined) {
+					alert("there was an error!");
+				}
+			});
+			
+		});}
 
 	// manages data fetching from glassdoor API
 	function gdAPICompany(company, callback){
+		alert('gdAPICompany');
 		var gdAPIData = glassdoorAPIData(company, callback);
 	};
 
 
 	// shows company logo on screen, hides search box
 	function writeData(gdAPIData, searchBoxID, selectedCompanyIndex) {
-
+		alert('writeData');
 		$('#' + searchBoxID).val(gdAPIData.employers[selectedCompanyIndex].name);
 		$('#' + searchBoxID).prop('disabled', true);
 		var logoURL = gdAPIData.employers[selectedCompanyIndex].squareLogo
@@ -99,7 +103,7 @@ $(document).ready(function(){
     function glassdoorAPIData(company, callback) {
     	company = company.toLowerCase()
 		var userAgent='chrome';
-			
+		alert('glassdoorAPIData');
 		apiCall="http://api.glassdoor.com/api/api.htm?t.p="+GDPartner+"&t.k="+GDKey+"&userip="+tempIP+"&useragent="+userAgent+"&format=json&v=1&action=employers&q="+company
 		if (company !== ""){
 				$.ajax({
@@ -160,6 +164,7 @@ $(document).ready(function(){
 	// this function shows a modal with all fo the employer 
 	// names from GD API call
 	function clarifyQueryModal(company, gdJSONResult) {
+		alert('clarifyQueryModal');
 		$('#queryNoMatchModal').modal('show');
 		jQuery.each(gdJSONResult.employers, function(i) {
 			var option = gdJSONResult.employers[i].name;
@@ -171,6 +176,7 @@ $(document).ready(function(){
 
 
 	function clarifySelect(callback) {
+		alert('clarifySelect');
 		$('#clarify-button').click(function(){
 			selectedCompanyIndex = $('.company-clarified:checked').val();
 			console.log(selectedCompanyIndex);
@@ -184,27 +190,30 @@ $(document).ready(function(){
 
 
 	function cancelClarify(){
+		alert(cancelClarify);
 		$('#cancel-button').click(function(){
 			$('#company-clarify-select').empty();
 		});
 	}
 
 
-	function postDataToServer(finalCompanyData, callback){
-		var allDataStr = JSON.stringify(finalCompanyData);
-		console.log(allDataStr);
-		alert("allDataStr");
-		$.post({
+	function postDataToServer(allDataStr, callback){
+		alert("postDataToServer");
+		$.ajax({
 			contentType: "application/JSON",
+			type: 'post',
 			url: "/results/",
 			data: allDataStr,
-			dataType: JSON,
+			csrfmiddlewaretoken: '{{ csrf_token }}',
+			dataType: 'json',
 		});
 	}
 
-	function checkInputsActivateButton(){
+	function checkInputsActivateButton(data){
+		alert('checkInputsActivateButton');
 		if ($('#company1').val() != '' && $('#company1').val()!= '' && $('#company3').val() != ''){
 			$('#companies-submit').prop('disabled', false);
+
 		}
 	};
 

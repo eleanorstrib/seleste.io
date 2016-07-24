@@ -12,38 +12,42 @@ def home(request):
 
 @ensure_csrf_cookie
 def companies(request):
-	return render_to_response('search/companies.html', {})
+	return render(request, 'search/companies.html', {})
 
 
 def results(request):
 	ranked_cos = {}
 	all_company_data = {}
 	if request.method == 'POST':
-		data = request.body.decode("utf-8")
-		json_data = json.loads(data)
-		priorities = json_data.pop(0)
+		print("this is the data:", request.body)
+		print ("type:", type(request.body))
+		# data = request.body.decode("utf-8")
+		# print("First", type(data))
+		# json_data = json.loads(data)
 
-		for company in json_data:
-			company_name = company['name']
-			all_company_data[company_name] = [{'glassdoor':company}]
+		# priorities = json_data.pop(0)
 
-			# initiate the web scraper to get data from Indeed
-			soup = get_soup(BASE_URL, company_name)
-			indeed_data = get_ratings(soup, company_name)
-			if "no ratings available" not in indeed_data:
-				all_company_data[company_name] = all_company_data.get(company_name, []) + [{'indeed': indeed_data}]
-			else:
-				print("no indeed data for", company_name)
+		# for company in json_data:
+		# 	company_name = company['name']
+		# 	all_company_data[company_name] = [{'glassdoor':company}]
 
-			merge_data(all_company_data, priorities)
+		# 	# initiate the web scraper to get data from Indeed
+		# 	soup = get_soup(BASE_URL, company_name)
+		# 	indeed_data = get_ratings(soup, company_name)
+		# 	if "no ratings available" not in indeed_data:
+		# 		all_company_data[company_name] = all_company_data.get(company_name, []) + [{'indeed': indeed_data}]
+		# 	else:
+		# 		print("no indeed data for", company_name)
 
-
-		for co in all_company_data:
-			ranked_cos[co] = all_company_data[co][2]
+		# 	merge_data(all_company_data, priorities)
 
 
-		print ("this is the ranked company list: ", ranked_cos)
-	return render(request, 'search/results.html', {'ranked_cos': ranked_cos})
+		# for co in all_company_data:
+		# 	ranked_cos[co] = all_company_data[co][2]
+
+
+		# print ("this is the ranked company list: ", ranked_cos)
+	return render(request, 'search/results.html', {})
 
 	# else:
 	# 	print("not post")
