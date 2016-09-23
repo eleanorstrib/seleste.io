@@ -1,5 +1,5 @@
 from django.shortcuts import render, render_to_response
-from django.http import HttpResponseRedirect, HttpResponse
+from django.http import HttpResponseRedirect, HttpResponse, QueryDict
 from django.views.decorators.csrf import ensure_csrf_cookie
 from search.models import Company, Glassdoor, Indeed 
 import json
@@ -19,7 +19,12 @@ def companies(request):
 def results(request):
 	ranked_cos = {}
 	all_company_data = {}
-	print(request)
+	if request.method == 'POST':
+		data = {k: v[0] if len(v)==1 else v for k, v in QueryDict(request.body).lists()}
+		print(data)
+		print (type(data))
+		for item in data:
+			print (item)
 		# data = request.body.decode("utf-8")
 		# print("First", type(data))
 		# json_data = json.loads(data)
