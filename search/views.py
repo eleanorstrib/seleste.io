@@ -6,6 +6,7 @@ import json
 import requests
 from search.indeed import get_soup, get_ratings, BASE_URL, RATING_DENOMINATOR, AVAILABLE_STARS
 from search.company_data import merge_data
+from django.http import JsonResponse
 
 def home(request):
 	return render(request, 'search/index.html', {})
@@ -18,9 +19,7 @@ def companies(request):
 def results(request):
 	ranked_cos = {}
 	all_company_data = {}
-	if request.method == 'POST':
-		print("this is the data:", request.body)
-		print ("type:", type(request.body))
+	print(request)
 		# data = request.body.decode("utf-8")
 		# print("First", type(data))
 		# json_data = json.loads(data)
