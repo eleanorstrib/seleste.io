@@ -128,6 +128,7 @@ $(document).ready(function(){
 									companyData[i] = "False"
 								}
 							}
+
 							finalCompanyData.push(companyData);
 							console.log(finalCompanyData);
 							
@@ -141,7 +142,7 @@ $(document).ready(function(){
 								}
 								finalCompanyData.push(gdJSONResult.employers[selectedCompanyIndex]);
 								console.log(finalCompanyData);
-								localStorage.setItem("gdCompanyData", JSON.stringify(finalCompanyData));
+								localStorage.setItem("gdCompanyData", finalCompanyData);
 								console.log(localStorage);
 							});
 							cancelClarify();
@@ -192,14 +193,13 @@ $(document).ready(function(){
 
 
 	function postDataToServer(finalCompanyData, callback){
-		data_json = JSON.stringify(finalCompanyData);
-		alert(data_json);
-		alert(typeof(data_json));
+		alert(finalCompanyData);
+
 		$.ajax({
 			contentType: 'application/JSON',
 			type: 'POST',
 			url: '/results/',
-			data: data_json,
+			data: JSON.stringify(finalCompanyData),
 			// dataType: 'json'
 			success: function(data, jqXHR){
 					alert("over to django");
