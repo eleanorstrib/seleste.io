@@ -22,38 +22,28 @@ def results(request):
 	# catch in case T/F vars not cleaned in client
 	true = True
 	false = False
-	if request.method == 'POST':
 
-		# frontend_data = {k: v[0] if len(v)==1 else v for k, v in QueryDict(request.body).lists()}
-		# frontend_data = json.loads( request.body.decode('utf-8') )
-		# print (frontend_data)
+	if request.method == 'POST':
 		data=request.body.decode('utf-8')
 		print(data)
 		print(type(data))
 		if "next-results=Submit" not in data:
 			all_user_inputs = json.loads(data)
 			priority = all_user_inputs[0]
-			company1 = all_user_inputs[1]
-			company2 = all_user_inputs[2]
-			company3 = all_user_inputs[3]
-
-			print (company3)
-			print (type(company3))
-		# priorities = json_data.pop(0)
-
-		# for company in json_data:
-		# 	company_name = company['name']
-		# 	all_company_data[company_name] = [{'glassdoor':company}]
-
+			gd_data = all_user_inputs[1:]
+			print (gd_data)
 		# 	# initiate the web scraper to get data from Indeed
-		# 	soup = get_soup(BASE_URL, company_name)
-		# 	indeed_data = get_ratings(soup, company_name)
-		# 	if "no ratings available" not in indeed_data:
-		# 		all_company_data[company_name] = all_company_data.get(company_name, []) + [{'indeed': indeed_data}]
-		# 	else:
-		# 		print("no indeed data for", company_name)
+			for co in gd_data:
+				co_name = co['name']
+				soup = get_soup(BASE_URL, co_name)
+				indeed_data = get_ratings(soup, co_name)
+				if "no ratings available" not in indeed_data:
+					print (co_name)
+					print (indeed_data)
+				else:
+					print("no indeed data for", co_name)
 
-		# 	merge_data(all_company_data, priorities)
+			# merge_data(all_company_data, priorities)
 
 
 		# for co in all_company_data:
