@@ -5,7 +5,7 @@ from search.models import Company, Glassdoor, Indeed
 import json
 import requests
 from search.indeed import get_soup, get_ratings, BASE_URL, RATING_DENOMINATOR, AVAILABLE_STARS
-from search.company_data import merge_data
+from search.company_data import tabulate
 from django.http import JsonResponse
 
 def home(request):

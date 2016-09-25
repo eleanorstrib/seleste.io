@@ -12,8 +12,7 @@ test_priorities = {"culturevalues":25,"opportunities":40,"management":35,"compen
 
 def tabulate(test_indeed, test_gd, test_priorities):
 	"""
-	This function merges the Glassdoor and Indeed datasets as weighted
-	averages
+	Merges the Glassdoor and Indeed datasets as weighted averages, returns results
 	"""
 	co_num = 3
 	results = {}
@@ -30,10 +29,16 @@ def tabulate(test_indeed, test_gd, test_priorities):
 		weighted_average_company(weight_ratings, results, company_name, current_gd, current_indeed)
 		sorted_scores = highest_score_list(results, company_name, sorted_scores)
 
+	print (sorted_scores)
+	print (results)
+
 	return results
 
 
 def weight_ratings(priorities):
+	"""
+	Generates a dict of weighted ratings from the priorities variable
+	"""
 	weight_ratings = {}
 	weight_ratings['culture'] = (priorities['culturevalues'])/100
 	weight_ratings['opportunities'] = (priorities['opportunities'])/100
@@ -41,11 +46,13 @@ def weight_ratings(priorities):
 	weight_ratings['compensationbenefits'] = (priorities['compensationbenefits'])/100
 	weight_ratings['worklifebalance'] = (priorities['worklifebalance'])/100
 
-	print (weight_ratings)
 	return weight_ratings
 
 
 def sum_reviews(company_name, results, current_gd, current_indeed):
+	"""
+	Sums up the number of reviews, determines % from each source
+	"""
 	total_gd_ratings = current_gd['numberOfRatings']
 	total_indeed_ratings = current_indeed['totalReviews']
 	results[company_name]['sum_all_ratings'] = total_indeed_ratings + total_gd_ratings
@@ -56,6 +63,9 @@ def sum_reviews(company_name, results, current_gd, current_indeed):
 
 
 def weighted_average_company(weight_ratings, results, company_name, current_gd, current_indeed):
+	"""
+	Returns weighted averages for each priority and an overall score in the results dict
+	"""
 	pct_gd = results[company_name]['pct_gd']
 	pct_indeed = results[company_name]['pct_indeed']
 	results[company_name]['culture'] = (pct_gd*float(current_gd['cultureAndValuesRating'])) + (pct_indeed*float(current_indeed['Culture']))
@@ -69,11 +79,14 @@ def weighted_average_company(weight_ratings, results, company_name, current_gd, 
 
 
 def highest_score_list(results, company_name, sorted_scores):
+	"""
+	Generates a list of tuples sorted from highest to lowest overall score
+	"""
 	sorted_scores.append((company_name, results[company_name]['score']))
 	sorted_scores.sort(reverse=True)
-	print (sorted_scores)
 
 	return sorted_scores
+
 
 tabulate(test_indeed, test_gd, test_priorities)
 
