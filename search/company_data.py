@@ -17,6 +17,8 @@ def tabulate(test_indeed, test_gd, test_priorities):
 	"""
 	co_num = 3
 	results = {}
+	sorted_scores = []
+
 	weight_pct = weight_ratings(test_priorities)
 
 	for i in range(co_num):
@@ -26,7 +28,7 @@ def tabulate(test_indeed, test_gd, test_priorities):
 		results[company_name] = {}
 		results = sum_reviews(company_name, results, current_gd, current_indeed)
 		weighted_average_company(weight_ratings, results, company_name, current_gd, current_indeed)
-		print(results)
+		sorted_scores = highest_score_list(results, company_name, sorted_scores)
 
 	return results
 
@@ -52,6 +54,7 @@ def sum_reviews(company_name, results, current_gd, current_indeed):
 
 	return results
 
+
 def weighted_average_company(weight_ratings, results, company_name, current_gd, current_indeed):
 	pct_gd = results[company_name]['pct_gd']
 	pct_indeed = results[company_name]['pct_indeed']
@@ -60,7 +63,17 @@ def weighted_average_company(weight_ratings, results, company_name, current_gd, 
 	results[company_name]['management'] = (pct_gd*float(current_gd['seniorLeadershipRating'])) + (pct_indeed*float(current_indeed['Management']))
 	results[company_name]['compensationbenefits'] = (pct_gd*float(current_gd['compensationAndBenefitsRating'])) + (pct_indeed*float(current_indeed['Compensation/Benefits']))
 	results[company_name]['worklifebalance'] = (pct_gd*float(current_gd['workLifeBalanceRating'])) + (pct_indeed*float(current_indeed['Work/Life Balance']))
+	results[company_name]['score'] = results[company_name]['culture'] + results[company_name]['opportunities'] + results[company_name]['management'] + results[company_name]['compensationbenefits'] + results[company_name]['worklifebalance']
+	
 	return results
+
+
+def highest_score_list(results, company_name, sorted_scores):
+	sorted_scores.append((company_name, results[company_name]['score']))
+	sorted_scores.sort(reverse=True)
+	print (sorted_scores)
+
+	return sorted_scores
 
 tabulate(test_indeed, test_gd, test_priorities)
 
