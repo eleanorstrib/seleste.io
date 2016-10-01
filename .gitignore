@@ -3,3 +3,4 @@ sub*.DS_store
 *secret.js
 *venv
 testcode.py*
+*.pyc

@@ -141,9 +141,7 @@ $(document).ready(function(){
 									callback(gdJSONResult, selectedCompanyIndex);
 								}
 								finalCompanyData.push(gdJSONResult.employers[selectedCompanyIndex]);
-								console.log(finalCompanyData);
 								localStorage.setItem("gdCompanyData", finalCompanyData);
-								console.log(localStorage);
 							});
 							cancelClarify();
 						}
