@@ -51,7 +51,7 @@ def results(request):
 
 
 		# print ("this is the ranked company list: ", ranked_cos)
-	return render(request, 'search/results.html', {})
+	return render(request, 'search/results.html', {'data':data})
 
 	# else:
 	# 	print("not post")

@@ -63,16 +63,9 @@ $(document).ready(function(){
 	});
 
 	// executes when button is clicked, calls function that posts data to server
-		$("#companies-submit").on('click', function(e, callback){
-			// e.preventDefault();
-			alert("I was clicked");
+		$("#companies-form").on('submit', function(e, callback){
+			e.preventDefault();
 			postDataToServer(finalCompanyData, callback);
-			// 	function(data){
-			// 	if (data === undefined) {
-			// 		alert("there was an error!");
-			// 	} else {}
-			// });
-			
 		});
 
 
@@ -208,6 +201,8 @@ $(document).ready(function(){
 				alert(msg, error);
 			}
 		});
+		   $("#companies-form").unbind('submit');
+            return false;
 	}
 
 	function checkInputsActivateButton(data){
