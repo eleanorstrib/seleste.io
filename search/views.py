@@ -27,21 +27,20 @@ def results(request):
 		data=request.body.decode('utf-8')
 		print(data)
 		print(type(data))
-		if "next-results=Submit" not in data:
-			all_user_inputs = json.loads(data)
-			priority = all_user_inputs[0]
-			gd_data = all_user_inputs[1:]
-			print (gd_data)
-		# 	# initiate the web scraper to get data from Indeed
-			for co in gd_data:
-				co_name = co['name']
-				soup = get_soup(BASE_URL, co_name)
-				indeed_data = get_ratings(soup, co_name)
-				if "no ratings available" not in indeed_data:
-					print (co_name)
-					print (indeed_data)
-				else:
-					print("no indeed data for", co_name)
+		all_user_inputs = json.loads(data)
+		priority = all_user_inputs[0]
+		gd_data = all_user_inputs[1:]
+		print (gd_data)
+	# 	# initiate the web scraper to get data from Indeed
+		for co in gd_data:
+			co_name = co['name']
+			soup = get_soup(BASE_URL, co_name)
+			indeed_data = get_ratings(soup, co_name)
+			if "no ratings available" not in indeed_data:
+				print (co_name)
+				print (indeed_data)
+			else:
+				print("no indeed data for", co_name)
 
 			# merge_data(all_company_data, priorities)
 
@@ -51,7 +50,7 @@ def results(request):
 
 
 		# print ("this is the ranked company list: ", ranked_cos)
-	return render(request, 'search/results.html', {'data':data})
+		return render(request, 'search/results.html', {'data':data})
 
 	# else:
 	# 	print("not post")
@@ -60,7 +59,11 @@ def results(request):
 	# 	for co in all_company_data:
 	# 		ranked_cos[co] = all_company_data[co][2]
 	# 	print ("this is the ranked company list: ", ranked_cos)
-	# 	return render(request, 'search/results.html', {'ranked_cos': ranked_cos})
+	else:
+		print (request.method)
+		print(request.body.decode('utf-8'))
+
+		return render(request, 'search/results.html', {'data': 'no data'})
 
 	
 

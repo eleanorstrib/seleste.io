@@ -201,8 +201,8 @@ $(document).ready(function(){
 				alert(msg, error);
 			}
 		});
-		   $("#companies-form").unbind('submit');
-            return false;
+		   // $("#companies-form").unbind('submit');
+     //        return false;
 	}
 
 	function checkInputsActivateButton(data){
