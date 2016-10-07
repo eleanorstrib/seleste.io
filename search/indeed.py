@@ -44,13 +44,21 @@ def get_ratings(soup, company):
 		try:
 			company_ratings['totalReviews'] = int(raw_num_reviews)
 		except: 
-			company_ratings['totalReviews'] = float(raw_num_reviews)
+			print (company_ratings['totalReviews'])
+			company_ratings['totalReviews'] = 0
 
 		company_ratings['overall'] = [float(element.get_text()) for element in soup.select('div span.cmp-average-rating')][0]
 		company_ratings['name'] = company
 
 	else:
 		company_ratings['totalReviews'] = 0
+		company_ratings['overall'] = 0
+		company_ratings['Culture'] = 0
+		company_ratings['Management'] = 0
+		company_ratings['Job Security/Advancement'] = 0
+		company_ratings['Work/Life Balance'] = 0
+		company_ratings['Compensation/Benefits'] = 0
+
 
 	return company_ratings
 
