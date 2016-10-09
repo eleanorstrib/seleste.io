@@ -5,8 +5,9 @@ from search.models import Company, Glassdoor, Indeed
 import json
 import requests
 from search.indeed import get_soup, get_ratings, BASE_URL, RATING_DENOMINATOR, AVAILABLE_STARS
-from search.company_data import tabulate
+from search.company_data import sum_reviews, weighted_average_company, weight_ratings
 from django.http import JsonResponse
+from operator import itemgetter
 
 def home(request):
 	return render(request, 'search/index.html', {})
@@ -37,11 +38,29 @@ def results(request):
 			except:
 				co_name = co['none']
 			
-		final_results = tabulate(in_data, gd_data, priorities)
-		print ("these are the final results")
-		print (final_results)
+		co_num = 3
+		results = {}
+		final_results = {}
+		sorted_scores = []
 
-		return HttpResponse(final_results)
+		for i in range(co_num):
+			current_gd = gd_data[i]
+			current_indeed = in_data[i]
+			company_name = current_gd['name']
+			results[company_name] = {}
+			results = sum_reviews(company_name, results, current_gd, current_indeed)
+			wt_avg_co = weighted_average_company(weight_ratings, results, company_name, current_gd, current_indeed)
+			sorted_scores.append((company_name, results[company_name]['score']))
+			
+
+		sorted_scores = sorted(sorted_scores,key=itemgetter(1))
+		final_results['sorted_scores'] = sorted_scores
+		final_results['results'] = results
+		final_results['weight_pct'] = weight_ratings(priorities)
+		print(final_results)
+
+		return HttpResponse(json.dumps(final_results),
+            content_type="application/json")
 
 	else:
 		return HttpResponse("there was an error")

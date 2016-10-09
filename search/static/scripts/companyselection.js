@@ -239,8 +239,11 @@ $(document).ready(function(){
 			url: '/results/',
 			data: JSON.stringify(finalCompanyData),
 			// dataType: 'json'
-			success: function(data, jqXHR){
+			success: function(json, jqXHR){
 					alert("over to django");
+					console.log(json);
+					$('#company-selection').animate({height: '0px', opacity: '0.4'}, "slow");
+					$('#results').prepend(json.sorted_scores);
 				},
 			error: function(xhr, msg, error, data) {
 				alert(msg, error);

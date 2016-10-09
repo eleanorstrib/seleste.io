@@ -1,34 +1,5 @@
 import json
 import sys
-from operator import itemgetter
-
-
-def tabulate(in_data, gd_data, priorities):
-	"""
-	Merges the Glassdoor and Indeed datasets as weighted averages, returns results
-	"""
-	co_num = 3
-	results = {}
-	sorted_scores = []
-
-	weight_pct = weight_ratings(priorities)
-
-	for i in range(co_num):
-		current_gd = gd_data[i]
-		print(current_gd)
-		current_indeed = in_data[i]
-		company_name = current_gd['name']
-		results[company_name] = {}
-		results = sum_reviews(company_name, results, current_gd, current_indeed)
-		wt_avg_co = weighted_average_company(weight_ratings, results, company_name, current_gd, current_indeed)
-		sorted_scores.append((company_name, results[company_name]['score']))
-		
-
-	sorted_scores = sorted(sorted_scores,key=itemgetter(1))
-
-	final_results = sorted_scores.append([results])
-	print("final results form company_data", final_results)
-	return final_results
 
 
 def weight_ratings(priorities):
@@ -72,12 +43,3 @@ def weighted_average_company(weight_ratings, results, company_name, current_gd, 
 	results[company_name]['score'] = results[company_name]['culture'] + results[company_name]['opportunities'] + results[company_name]['management'] + results[company_name]['compensationbenefits'] + results[company_name]['worklifebalance']
 	
 	return results
-
-
-if __name__ == '__main__':
-    # try:
-    #     arg = sys.argv[1]
-    # except IndexError:
-        # arg = None
-
-    return_val = tabulate(in_data, gd_data, priorities)
