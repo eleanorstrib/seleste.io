@@ -231,26 +231,25 @@ $(document).ready(function(){
 
 
 	function postDataToServer(finalCompanyData, callback){
-		alert(finalCompanyData);
-
+		var finalCompanyData = finalCompanyData;
 		$.ajax({
 			contentType: 'application/JSON',
 			type: 'POST',
 			url: '/results/',
 			data: JSON.stringify(finalCompanyData),
-			// dataType: 'json'
-			success: function(json, jqXHR){
-					alert("over to django");
-					console.log(json);
-					$('#company-selection').animate({height: '0px', opacity: '0.4'}, "slow");
-					$('#results').prepend(json.sorted_scores);
+			success: function(json, finalCompanyData,jqXHR){
+					console.log(finalCompanyData);
+					$('#select-companies').animate({opacity:'0.3'}, "slow").slideUp();
+					$('#remind-weights').html('<h3><img src="../static/images/culture.svg" alt="culture and values" id="culturevalues" class="priorities-img" data-pin-nopin="true">' + (parseInt(json.weight_pct.culturevalues) * 100) + '</h3>');
+					$('#company-rankings').html('<h3>' + json.sorted_scores[2][0] + '<br />' + json.sorted_scores[2][1] + '</h3><br />' + 
+												'<h3>' + json.sorted_scores[1][0] + '<br />' + json.sorted_scores[1][1] + '</h3><br />' + 
+												'<h3>' + json.sorted_scores[0][0] + '<br />' + json.sorted_scores[0][1] + '</h3><br />'
+												);
 				},
 			error: function(xhr, msg, error, data) {
 				alert(msg, error);
 			}
 		});
-		   // $("#companies-form").unbind('submit');
-     //        return false;
 	}
 
 	function checkInputsActivateButton(data){

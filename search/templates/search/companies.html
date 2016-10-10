@@ -1,15 +1,10 @@
 {% extends 'base.html' %}
 {% load staticfiles %}
 {% block content %}
-<script src="https://code.jquery.com/jquery-2.2.1.min.js"></script>
-<script type="text/javascript" src="../static/scripts/jquery.client.js"></script>
-<script type="text/javascript" src="../static/scripts/secret.js"></script>
-<script type="text/javascript" src="/static/scripts/js.cookie.js"></script>
-<script type="text/javascript" src="../static/scripts/companyselection.js"></script>
-<link rel="stylesheet" type="text/css" href="../static/styles/style.css"></script>
+
 
 <div class="container-fluid">
-
+<div id="select-companies">
 	<div class="row">
 		<div class="title-text">
 			Which companies are you interested in?
@@ -44,7 +39,6 @@
 			<div class="form-group" align="center">
 				<label for "company one">Company Three</label>
 				<input type="text" name="company3" id="company3" class="company" required> <br />
-				
 			</div>
 		</div>
 
@@ -61,13 +55,18 @@
 	<div class="row">
 		<div class="col-md-10"></div>
 		<div class="col-md-2">
-			<input type="submit" class="btn btn-custom" id="companies-submit" name="next-results"></input>
+			<input type="submit" class="btn btn-custom" id="companies-submit" name="next-results" />
+<!-- 			</input> -->
 		</div>
 	</form>
 	</div>
+
+</div>
 	<div id="results">
-	{{ data }}
+		<div class="col-md-3" id="remind-weights"></div>
+		<div class="col-md-9" id="company-rankings"></div>
 	</div>
+
 </div>
 <!--end regular page content-->
 
@@ -95,7 +94,7 @@
 	      </div>
 	      <div class="modal-footer">
 	      	<button type="button" class="btn btn-custom" id="cancel-button" data-dismiss="modal">cancel</button>
-	        <button type="button" class="btn btn-custom" id="clarify-button" data-dismiss="modal">select & close</button>
+	        <button type="button" class="btn btn-custom" id="clarify-button" data-dismiss="modal">select \& close</button>
 	      </div>
 	    </div>
 
@@ -121,5 +120,10 @@
 		  </div>
 		</div>
 
-
+<script src="https://code.jquery.com/jquery-2.2.1.min.js"></script>
+<script type="text/javascript" src="../static/scripts/jquery.client.js"></script>
+<script type="text/javascript" src="../static/scripts/secret.js"></script>
+<script type="text/javascript" src="/static/scripts/js.cookie.js"></script>
+<script type="text/javascript" src="../static/scripts/companyselection.js"></script>
+<!-- <link rel="stylesheet" type="text/css" href="../static/styles/style.css"></script> -->
 {% endblock %}
