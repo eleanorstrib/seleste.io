@@ -20,7 +20,7 @@ def sum_reviews(company_name, results, current_gd, current_indeed):
 	"""
 	Sums up the number of reviews, determines % from each source
 	"""
-	total_gd_ratings = current_gd['numberOfRatings']
+	total_gd_ratings = current_gd['ceo']['numberOfRatings']
 	total_indeed_ratings = current_indeed['totalReviews']
 	results[company_name]['sum_all_ratings'] = total_indeed_ratings + total_gd_ratings
 	results[company_name]['pct_gd'] = total_gd_ratings/(results[company_name]['sum_all_ratings'])
@@ -43,3 +43,10 @@ def weighted_average_company(weight_ratings, results, company_name, current_gd, 
 	results[company_name]['score'] = results[company_name]['culture'] + results[company_name]['opportunities'] + results[company_name]['management'] + results[company_name]['compensationbenefits'] + results[company_name]['worklifebalance']
 	
 	return results
+
+def add_co_data(current_gd, company_name, results):
+	"""
+	This function adds key data from Glassdoor to the company record in the results dict
+	"""
+	results[company_name]['logo'] = current_gd['squareLogo']
+	

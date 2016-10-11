@@ -1,6 +1,7 @@
 //jquery client code
 $(document).ready(function(){
 	$('#companies-submit').prop('disabled', true);
+	$('#results').hide();
 	//CSRF settings for every Ajax call -- from real python gh
 	$(function() {
 
@@ -238,12 +239,15 @@ $(document).ready(function(){
 			url: '/results/',
 			data: JSON.stringify(finalCompanyData),
 			success: function(json, finalCompanyData,jqXHR){
-					console.log(finalCompanyData);
+					console.log(json);
 					$('#select-companies').animate({opacity:'0.3'}, "slow").slideUp();
-					$('#remind-weights').html('<h3><img src="../static/images/culture.svg" alt="culture and values" id="culturevalues" class="priorities-img" data-pin-nopin="true">' + (parseInt(json.weight_pct.culturevalues) * 100) + '</h3>');
-					$('#company-rankings').html('<h3>' + json.sorted_scores[2][0] + '<br />' + json.sorted_scores[2][1] + '</h3><br />' + 
-												'<h3>' + json.sorted_scores[1][0] + '<br />' + json.sorted_scores[1][1] + '</h3><br />' + 
-												'<h3>' + json.sorted_scores[0][0] + '<br />' + json.sorted_scores[0][1] + '</h3><br />'
+					$('#results').show();
+					companya=json.sorted_scores['gd_data'][0]['name']
+					companya=json.sorted_scores['gd_data'][1]['name']
+					companyc=json.sorted_scores['gd_data'][2]['name']
+					$('#company-rankings').append('<div class="col-md-3"><h3>' +  '<br />' + json.sorted_scores[2][0] + '<br />' + json.sorted_scores[2][1] + '</h3></div>' + 
+												'<div class="col-md-3"><h3>' + json.sorted_scores[1][0] + '<br />' + json.sorted_scores[1][1] + '</h3></div>' + 
+												'<div class="col-md-3"><h3>' + json.sorted_scores[0][0] + '<br />' + json.sorted_scores[0][1] + '</h3></div>'
 												);
 				},
 			error: function(xhr, msg, error, data) {

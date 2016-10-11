@@ -57,6 +57,7 @@ def results(request):
 		final_results['sorted_scores'] = sorted_scores
 		final_results['results'] = results
 		final_results['weight_pct'] = weight_ratings(priorities)
+		final_results['gd_data'] = gd_data
 		print(final_results)
 
 		return HttpResponse(json.dumps(final_results),
