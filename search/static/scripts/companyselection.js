@@ -239,16 +239,21 @@ $(document).ready(function(){
 			url: '/results/',
 			data: JSON.stringify(finalCompanyData),
 			success: function(json, finalCompanyData,jqXHR){
-					console.log(json);
 					$('#select-companies').animate({opacity:'0.3'}, "slow").slideUp();
 					$('#results').show();
-					companya=json.sorted_scores['gd_data'][0]['name']
-					companya=json.sorted_scores['gd_data'][1]['name']
-					companyc=json.sorted_scores['gd_data'][2]['name']
-					$('#company-rankings').append('<div class="col-md-3"><h3>' +  '<br />' + json.sorted_scores[2][0] + '<br />' + json.sorted_scores[2][1] + '</h3></div>' + 
-												'<div class="col-md-3"><h3>' + json.sorted_scores[1][0] + '<br />' + json.sorted_scores[1][1] + '</h3></div>' + 
-												'<div class="col-md-3"><h3>' + json.sorted_scores[0][0] + '<br />' + json.sorted_scores[0][1] + '</h3></div>'
-												);
+					$('#culture-priority-pts').append('<p>' + json.weight_pct.culture * 100 + '</p>');
+					$('#management-priority-pts').append('<p>' + json.weight_pct.management * 100 + '</p>');
+					$('#compensation-priority-pts').append('<p>' + json.weight_pct.compensationbenefits * 100 + '</p>');
+					$('#opportunity-priority-pts').append('<p>' + json.weight_pct.opportunities * 100+ '</p>');
+					$('#worklifebalance-priority-pts').append('<p>' + json.weight_pct.worklifebalance * 100 + '</p>');
+					// companya=json.sorted_scores['gd_data'][0]['name']
+					// companyb=json.sorted_scores['gd_data'][1]['name']
+					// companyc=json.sorted_scores['gd_data'][2]['name']
+					console.log(json.weight_pct.culture);
+					// $('#company-rankings').append('<div class="col-md-3"><h3>' +  '<br />' + json.sorted_scores[2][0] + '<br />' + json.sorted_scores[2][1] + '</h3></div>' + 
+					// 							'<div class="col-md-3"><h3>' + json.sorted_scores[1][0] + '<br />' + json.sorted_scores[1][1] + '</h3></div>' + 
+					// 							'<div class="col-md-3"><h3>' + json.sorted_scores[0][0] + '<br />' + json.sorted_scores[0][1] + '</h3></div>'
+					// 							);
 				},
 			error: function(xhr, msg, error, data) {
 				alert(msg, error);
